@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.5",
+    "felte": "^0.6.6",
     "svelte": "^3.35.0",
     "svelte-calendar": "^2.0.4",
     "svelte-hmr": "^0.13.0",

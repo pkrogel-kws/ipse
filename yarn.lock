@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@felte/common@^0.3.4":
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/@felte/common/-/common-0.3.6.tgz#e9be93408365b2e69f9746c7caae8a59188aa542"
+  integrity sha512-ZowfCj30cgeG88HPLlhjsFWL5OQsILfI2nGrQiT9pxObc2rPskL5S/2T6AQCYE3uAnVJK8+1KoZECVwq+shT0A==
+
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
   resolved "https://registry.npmjs.org/@nodelib/fs.scandir/-/fs.scandir-2.1.4.tgz"
@@ -170,6 +175,13 @@ fastq@^1.6.0:
   integrity sha512-7Eczs8gIPDrVzT+EksYBcupqMyxSHXXrHOLRRxU2/DicV8789MRBRR8+Hc2uWzUupOs4YS4JzBmBxjjCVBxD/g==
   dependencies:
     reusify "^1.0.4"
+
+felte@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/felte/-/felte-0.6.6.tgz#b718af209a12bcb95dc0b09c014007ecac6983f3"
+  integrity sha512-3b5PfmOlPeQ38Eeh5NGdYvpF5AqCLh1feJleCmWAuu1LmPLTwqyNjElJzPAio7RJUxakDiB13tyCJFt8Z8EJfA==
+  dependencies:
+    "@felte/common" "^0.3.4"
 
 fill-range@^7.0.1:
   version "7.0.1"

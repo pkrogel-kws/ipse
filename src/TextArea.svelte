@@ -1,13 +1,18 @@
 <script>
   export let label;
   export let value;
+  export let name;
+  export let disabled = false;
+  export let readOnly = false;
 </script>
 
 <div class="relative h-64 input-component mb-5">
   <textarea
-    id={label}
+    {disabled}
+    {readOnly}
+    id={name}
+    {name}
     type="text"
-    name="name"
     class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm"
     rows="50"
     cols="50"

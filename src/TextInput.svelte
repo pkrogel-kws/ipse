@@ -1,6 +1,7 @@
 <script>
   export let label;
   export let value;
+  export let name;
   export let disabled = false;
   export let readOnly = false;
 </script>
@@ -9,9 +10,9 @@
   <input
     {disabled}
     {readOnly}
-    id={label}
+    id={name}
     type="text"
-    name="name"
+    {name}
     class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm"
     {value}
   />

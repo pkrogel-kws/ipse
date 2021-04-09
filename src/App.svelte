@@ -4,10 +4,7 @@
   import Modal, { store } from "./modal";
   import CloseIcon from "./CloseButton.svelte";
   import SpeakerForm from "./SpeakerForm.svelte";
-  import putJson from "./put.json";
-  console.log(putJson, "put.json");
 
-  const IDX_HEADER_I = 6;
   const ROW_CLICK_EVENT_TYPE = "dblclick";
   const MUTATION_OBSERVER_NODE_ID =
     "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ListerPanel";
@@ -102,9 +99,9 @@
     <CloseIcon onClick={modalStore.close} />
   </div>
   <div slot="content" class="mx-8">
-    <SpeakerForm {data} />
+    <SpeakerForm {data} handleClose={modalStore.close} />
   </div>
-  <div slot="footer" class="mx-8 flex" let:store={{ close }}>
+  <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>
     <button
       class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
       type="button"
@@ -126,5 +123,5 @@
     >
       <i class="fas fa-heart" /> Save
     </button>
-  </div>
+  </div> -->
 </Modal>
