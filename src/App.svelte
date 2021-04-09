@@ -1,0 +1,130 @@
+<script>
+  import { onMount } from "svelte";
+  import { writable } from "svelte/store";
+  import Modal, { store } from "./modal";
+  import CloseIcon from "./CloseButton.svelte";
+  import SpeakerForm from "./SpeakerForm.svelte";
+  import putJson from "./put.json";
+  console.log(putJson, "put.json");
+
+  const IDX_HEADER_I = 6;
+  const ROW_CLICK_EVENT_TYPE = "dblclick";
+  const MUTATION_OBSERVER_NODE_ID =
+    "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ListerPanel";
+
+  let headers = [];
+  const modalStore = store(false);
+  const data = writable();
+
+  let rowClickListeners = [];
+
+  const removeRowClickEventListeners = () => {
+    rowClickListeners.forEach((removeListener) => {
+      removeListener();
+    });
+    rowClickListeners = [];
+  };
+
+  const addClickHandlersToRows = () => {
+    const rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
+
+    rows.forEach((row) => {
+      const handleClickRow = () => {
+        $data = getDataFromRow(row);
+
+        modalStore.open();
+      };
+      row.addEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
+      rowClickListeners.push(() => {
+        row.removeEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
+      });
+    });
+  };
+
+  const setupMutationObserver = () => {
+    const targetNode = document.getElementById(MUTATION_OBSERVER_NODE_ID);
+
+    const config = { attributes: false, childList: true, subtree: true };
+
+    const callback = function (mutationsList, observer) {
+      removeRowClickEventListeners();
+      addClickHandlersToRows();
+    };
+
+    // Create an observer instance linked to the callback function
+    const observer = new MutationObserver(callback);
+
+    // Start observing the target node for configured mutations
+    observer.observe(targetNode, config);
+
+    // Later, you can stop observing
+
+    return () => {
+      observer.disconnect();
+    };
+  };
+
+  const getDataFromRow = (row) => {
+    // const dataCells = [...row.querySelectorAll("td")].map(elem=>elem.innerHTML);
+    const dataCells = [...row.querySelectorAll("td")].map(
+      (elem) => elem.textContent
+    );
+    const data = {};
+    dataCells.forEach((val, index) => {
+      data[headers[index]] = val;
+    });
+    return data;
+  };
+
+  onMount(() => {
+    headers = [
+      ...document.querySelectorAll(
+        ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
+      ),
+    ].map((elem) => elem.ariaLabel);
+
+    addClickHandlersToRows();
+    const removeMutationObserver = setupMutationObserver();
+    return () => {
+      removeRowClickEventListeners();
+      removeMutationObserver();
+    };
+  });
+</script>
+
+<Modal store={modalStore}>
+  <div
+    slot="header"
+    class="bg-primary flex flex-row align-center px-8 py-8 text-white"
+  >
+    <h1>Add or Update Speaker</h1>
+    <div class="flex-grow" />
+    <CloseIcon onClick={modalStore.close} />
+  </div>
+  <div slot="content" class="mx-8">
+    <SpeakerForm {data} />
+  </div>
+  <div slot="footer" class="mx-8 flex" let:store={{ close }}>
+    <button
+      class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      type="button"
+      on:click={modalStore.close}
+    >
+      Discard
+    </button>
+    <button
+      class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      type="button"
+      on:click={modalStore.close}
+    >
+      Reset
+    </button>
+    <div class="flex-grow" />
+    <button
+      class="bg-primary text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:bg-primary-600 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      type="button"
+    >
+      <i class="fas fa-heart" /> Save
+    </button>
+  </div>
+</Modal>

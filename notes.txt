@@ -1,0 +1,3 @@
+    "vite-plugin-windicss": "0.12.5", - newest release breaks tailwind import.
+    https://github.com/windicss/vite-plugin-windicss/releases
+    https://github.com/windicss/vite-plugin-windicss/commit/7c46f1f
