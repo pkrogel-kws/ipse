@@ -32,13 +32,13 @@
         document.body.style.overflow = original;
       });
     }
-    // node.addEventListener("keydown", keydown);
+    node.addEventListener("keydown", keydown);
     // node.addEventListener("transitionend", transitionend);
     node.focus();
     modalList.push(node);
     returnFn.push(() => {
-      // node.removeEventListener("keydown", keydown);
-      // node.removeEventListener("transitionend", transitionend);
+      node.removeEventListener("keydown", keydown);
+      node.removeEventListener("transitionend", transitionend);
       modalList.pop();
       // Optional chaining to guard against empty array.
       modalList[modalList.length - 1]?.focus();

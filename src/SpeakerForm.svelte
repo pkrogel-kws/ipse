@@ -1,24 +1,45 @@
 <script>
   import { createForm } from "felte";
+  import { onMount } from "svelte";
 
   import TextInput from "./TextInput.svelte";
   import TextArea from "./TextArea.svelte";
   import DateInput from "./DateInput.svelte";
-
-  import { put } from "./api";
+  import createImisStore from "./imisStore";
+  import LoadingSpinner from "./LoadingSpinner.svelte";
 
   export let data;
   export let handleClose;
 
-  const { form, reset } = createForm({
-    onSubmit: (values) => {
-      console.log("Form.onSubmit", values);
-      put(values);
+  let remoteValue;
+
+  const { form, reset, touched } = createForm({
+    onSubmit: async (values) => {
+      try {
+        console.log("Form.onSubmit", values);
+        $remoteValue = values;
+      } catch (e) {
+        //TODO: handle
+      }
     },
+  });
+  //TODO:implement some form of dirty check
+  $: canSave = !!Object.values($touched).filter((t) => !!t).length;
+
+  onMount(async () => {
+    remoteValue = await createImisStore($data.ID);
+    return () => {
+      console.log(";~~~~~~~destroy");
+    };
   });
 </script>
 
 <form use:form class="flex flex-col justify-center items-stretch min-w-xl">
+  {#if $remoteValue?.loading}
+    <div class="inset-0 opacity-50 absolute bg-white z-1">
+      <LoadingSpinner />
+    </div>
+  {/if}
   <div
     class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
   >
@@ -34,17 +55,17 @@
         value={$data.Event_Code}
         disabled
       />
-      <TextInput
+      <!-- <TextInput
+        label="Start"
+        name="Function_Start_Date"
+        value={$data.Function_Start_Date}
+      /> -->
+
+      <DateInput
         label="Start"
         name="Function_Start_Date"
         value={$data.Function_Start_Date}
       />
-
-      <!-- <DateInput
-        label="Start"
-        value={$data.Function_Start_Date}
-        selected={new Date($data.Function_Start_Date)}
-      /> -->
       <TextInput
         label="Show PPT?"
         name="PPT_NO_SHOW"
@@ -55,11 +76,17 @@
       class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
     >
       <TextInput label="Function Code" value={$data.Function_Code} disabled />
-      <TextInput
+      <!-- <TextInput
+        label="End"
+        name="Function_End_Date"
+        value={$data.Function_End_Date}
+      /> -->
+      <DateInput
         label="End"
         name="Function_End_Date"
         value={$data.Function_End_Date}
       />
+
       <TextInput label="Role" name="Role" value={$data.Role} />
     </div>
   </div>
@@ -79,24 +106,19 @@
     />
   </div>
   <div class="mx-8 flex">
+    <div class="flex-grow" />
+
     <button
-      class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-      type="button"
-      on:click={handleClose}
-    >
-      Discard
-    </button>
-    <button
-      class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
       type="button"
       on:click={reset}
     >
       Reset
     </button>
-    <div class="flex-grow" />
     <button
-      class="bg-primary text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:bg-primary-600 outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+      class="bg-primary text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:bg-primary-600 outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
       type="submit"
+      disabled={!canSave}
     >
       <i class="fas fa-heart" /> Save
     </button>

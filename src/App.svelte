@@ -28,6 +28,8 @@
     rows.forEach((row) => {
       const handleClickRow = () => {
         $data = getDataFromRow(row);
+        $data.Function_Start_Date = new Date($data.Function_Start_Date);
+        $data.Function_End_Date = new Date($data.Function_End_Date);
 
         modalStore.open();
       };
@@ -70,6 +72,7 @@
     dataCells.forEach((val, index) => {
       data[headers[index]] = val;
     });
+    console.log("dataCells", dataCells);
     return data;
   };
 
@@ -78,7 +81,7 @@
       ...document.querySelectorAll(
         ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
       ),
-    ].map((elem) => elem.ariaLabel);
+    ].map((elem) => elem.getAttribute("aria-label"));
 
     addClickHandlersToRows();
     const removeMutationObserver = setupMutationObserver();
@@ -94,11 +97,11 @@
     slot="header"
     class="bg-primary flex flex-row align-center px-8 py-8 text-white"
   >
-    <h1>Add or Update Speaker</h1>
+    <h1>Update Speaker</h1>
     <div class="flex-grow" />
     <CloseIcon onClick={modalStore.close} />
   </div>
-  <div slot="content" class="mx-8">
+  <div slot="content" class="mx-8 relative">
     <SpeakerForm {data} handleClose={modalStore.close} />
   </div>
   <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>
