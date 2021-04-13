@@ -1,7 +1,6 @@
-import basePayload from "./put.json";
 // console.log(basePayload, "basePayload.json");
 
-const API_URL = "/testiMIS/api/CsISPE_Event_Speakers";
+const API_URL = "/iMIS/api/CsISPE_Event_Speakers";
 export const get = async (id) => {
   const RequestVerificationToken = document.getElementById(
     "__RequestVerificationToken"
@@ -30,23 +29,14 @@ export const get = async (id) => {
   }
 };
 
-const generatePayloadFromFormData = (data) => {
-  return Object.entries(data).map(([Name, Value]) => ({
-    $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-    Name,
-    Value,
-  }));
-};
 //SEQN is unique ID
-export const put = async (data) => {
+export const put = async ({ data, id, seqn }) => {
   if (!data) {
     console.error("API-put did not receive data from form");
     return;
   }
-  const payloadPropertyValues = generatePayloadFromFormData(data);
-  //   console.log("generated payloadPropertyValues", payloadPropertyValues);
-  const payload = { ...basePayload };
-  payload.Properties.$values = payloadPropertyValues;
+
+  const payload = generatePutPayloadFromFormData(data);
 
   console.log("final request payload", payload);
 
@@ -58,11 +48,12 @@ export const put = async (data) => {
     console.error("couldn't find request verification token");
     return;
   }
+
   try {
-    await fetch(API_URL, {
+    await fetch(`${API_URL}/~${id}|${seqn}`, {
       //parameter is based on the order of the filters
       method: "PUT",
-      data: JSON.stringify(putJson),
+      data: JSON.stringify(payload),
       headers: {
         RequestVerificationToken,
       },
@@ -75,6 +66,48 @@ export const put = async (data) => {
   } catch (e) {
     console.error("encountered error during fetch/put", e);
   }
+};
+
+const generatePutPayloadFromFormData = (data) => {
+  const values = Object.entries(data).map(([Name, Value]) => {
+    if (Value === "true" || Value === "false") {
+      Value = { $type: "System.Boolean", $value: Value };
+    }
+    return {
+      $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+      Name,
+      Value,
+    };
+  });
+
+  return {
+    $type: "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
+    EntityTypeName: "CsISPE_Event_Speakers",
+    PrimaryParentEntityTypeName: "Party",
+    Identity: {
+      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+      EntityTypeName: "CsISPE_Event_Speakers",
+      IdentityElements: {
+        $type:
+          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+        $values: [data.ID, data.SEQN],
+      },
+    },
+    PrimaryParentIdentity: {
+      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+      EntityTypeName: "Party",
+      IdentityElements: {
+        $type:
+          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+        $values: [data.ID],
+      },
+    },
+    Properties: {
+      $type:
+        "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
+      $values: values,
+    },
+  };
 };
 
 export default { get, put };

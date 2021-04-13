@@ -5,11 +5,19 @@ const api = getApi();
 
 const createStore = async (id) => {
   console.log("creating imis store for " + id);
-  const response = await api.get(id);
+  let response = await api.get(id);
+
+  const item = response.Items.$values[0];
+  // const currentData = extractValuesFromResponse(response);
   const currentData = response.Items.$values[0];
+  const seqn = currentData.Properties.$values.filter(
+    ({ Name }) => Name === "SEQN"
+  )[0].Value.$value;
+
   console.log("currentData", currentData);
   const { subscribe, set, update } = writable({
     loading: false,
+    response,
     data: currentData,
   });
 
@@ -21,19 +29,68 @@ const createStore = async (id) => {
       return data;
     });
 
-    const values = Object.entries(formData).map(([Name, Value]) => ({
-      $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-      Name,
-      Value,
-    }));
+    // const values = Object.entries(formData).map(([Name, Value]) => ({
+    //   $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+    //   Name,
+    //   Value,
+    // }));
 
-    const payload = { ...currentData };
-    payload.Properties.$values = values;
-    const response = await api.put(payload);
+    // const payload = { ...item };
+    // payload.Properties.$values = values;
+    const payload = patchPayload(currentData, formData);
+    console.log("patch?EPayload", payload);
+
+    response = await api.put({ data: payload, seqn, id });
     //TODO:handle errors here
     set(response);
   };
   return { subscribe, set: newSet };
+};
+
+const extractValuesFromResponse = (response) => {
+  const retVal = {};
+  response.Items.$values[0].Properties.$values.forEach(({ Name, Value }) => {
+    if (typeof Value === "object") {
+      retVal[Name] = Value.$value;
+    } else {
+      //string
+      retVal[Name] = Value;
+    }
+  });
+  return retVal;
+};
+
+const patchPayload = (payload, values) => {
+  payload.Properties.$values.forEach(({ Name, Value }, idx) => {
+    const newVal = values[Name];
+    if (!newVal) {
+      return;
+    }
+    // console.log(`patching `, { Name, Value, idx, newVal });
+    if (Value.$value !== undefined) {
+      // console.log(
+      //   "[before] payload.Properties.$values[idx]=",
+      //   payload.Properties.$values[idx]
+      // );
+      payload.Properties.$values[idx] = { ...Value, $value: newVal };
+      // console.log(
+      //   "[after] payload.Properties.$values[idx]=",
+      //   payload.Properties.$values[idx]
+      // );
+      return;
+    }
+    //string
+    // console.log(
+    //   "[before] payload.Properties.$values[idx]=",
+    //   payload.Properties.$values[idx]
+    // );
+    payload.Properties.$values[idx].Value = newVal;
+    // console.log(
+    //   "[after] payload.Properties.$values[idx]=",
+    //   payload.Properties.$values[idx]
+    // );
+  });
+  return payload;
 };
 
 // const generatePayloadFromFormData = (formData, ) => {
@@ -55,7 +112,7 @@ export default createStore;
 //   console.log("currentData", initial);
 //   const store = writable(initial);
 
-//   // define a request function that will do `fetch` and update store when request finishes
+//   // define a request function that will do `fetch` and update store when request fini shes
 //   store.request = async (method, url, params = null) => {
 //     // before we fetch, clear out previous errors and set `loading` to `true`
 //     store.update((data) => {

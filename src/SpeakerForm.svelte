@@ -7,16 +7,27 @@
   import DateInput from "./DateInput.svelte";
   import createImisStore from "./imisStore";
   import LoadingSpinner from "./LoadingSpinner.svelte";
-
+  import Switch from "./Switch.svelte";
   export let data;
   export let handleClose;
 
   let remoteValue;
 
-  const { form, reset, touched } = createForm({
+  const { form, reset, touched, data: formData } = createForm({
     onSubmit: async (values) => {
       try {
         console.log("Form.onSubmit", values);
+        //todo: probably handle this at the form field level rather than form onsubmit level
+        Object.entries(values).forEach(([key, val]) => {
+          if (val === "True") {
+            values[key] = true;
+            return;
+          }
+          if (val === "False") {
+            values[key] = false;
+            return;
+          }
+        });
         $remoteValue = values;
       } catch (e) {
         //TODO: handle
@@ -26,12 +37,15 @@
   //TODO:implement some form of dirty check
   $: canSave = !!Object.values($touched).filter((t) => !!t).length;
 
+  $: console.log($formData, "formData");
+
   onMount(async () => {
     remoteValue = await createImisStore($data.ID);
     return () => {
       console.log(";~~~~~~~destroy");
     };
   });
+  $: console.log("remoteValue", $remoteValue);
 </script>
 
 <form use:form class="flex flex-col justify-center items-stretch min-w-xl">
@@ -71,6 +85,11 @@
         name="PPT_NO_SHOW"
         value={$data.PPT_NO_SHOW}
       />
+      <!-- <Switch
+        label="Show PPT?"
+        name="PPT_NO_SHOW"
+        checked={$data.PPT_NO_SHOW}
+      /> -->
     </div>
     <div
       class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
