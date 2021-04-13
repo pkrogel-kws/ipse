@@ -5,6 +5,8 @@
   import TextInput from "./TextInput.svelte";
   import TextArea from "./TextArea.svelte";
   import DateInput from "./DateInput.svelte";
+  import DateInput2 from "./DateInput2.svelte";
+  import DateInput3 from "./DateInput3.svelte";
   import createImisStore from "./imisStore";
   import LoadingSpinner from "./LoadingSpinner.svelte";
   import Switch from "./Switch.svelte";
@@ -17,7 +19,6 @@
   const { form, reset, touched, data: formData } = createForm({
     onSubmit: async (values) => {
       try {
-        console.log("Form.onSubmit", values);
         //todo: probably handle this at the form field level rather than form onsubmit level
         Object.entries(values).forEach(([key, val]) => {
           if (val === "True") {
@@ -28,8 +29,16 @@
             values[key] = false;
             return;
           }
+          const maybeDate = new Date(val);
+          if(maybeDate !=='Invalid Date' && !isNaN(maybeDate)){
+            console.log('date !!! ' + val );
+             values[key] = maybeDate.toISOString();
+             return;
+          }
         });
-        $remoteValue = values;
+        console.log("Form.onSubmit", values);
+
+        $remoteValue = values;//API call
       } catch (e) {
         //TODO: handle
       }
@@ -38,7 +47,16 @@
   //TODO:implement some form of dirty check
   $: canSave = !!Object.values($touched).filter((t) => !!t).length;
 
-  $: console.log($formData, "formData");
+  // $: console.log($formData, "formData");
+
+  let resetEnd, resetStart;
+
+  const handleReset = () => {
+    reset();
+    // endDatePicker.reset();
+    resetEnd();
+    resetStart();
+  };
 
   onMount(async () => {
     remoteValue = await createImisStore($data.ID);
@@ -49,6 +67,9 @@
   $: console.log("remoteValue", $remoteValue);
 
   let checked = false;
+
+
+
 </script>
 
 <form use:form class="flex flex-col justify-center items-stretch min-w-xl">
@@ -82,6 +103,8 @@
         label="Start"
         name="Function_Start_Date"
         bind:value={$data.Function_Start_Date}
+        bind:reset={resetStart}
+
       />
       <!-- <TextInput
         label="Show PPT?"
@@ -107,7 +130,20 @@
         label="End"
         name="Function_End_Date"
         value={$data.Function_End_Date}
-      />
+        bind:reset={resetEnd}
+
+      />    
+        <!-- <DateInput2
+        label="End"
+        name="Function_End_Date"
+        value={$data.Function_End_Date}
+      />      -->
+        <!-- <DateInput3
+        label="End"
+        name="Function_End_Date"
+        value={$data.Function_End_Date}
+        bind:reset={resetEnd}
+      /> -->
 
       <TextInput label="Role" name="Role" value={$data.Role} />
     </div>
@@ -133,7 +169,8 @@
     <button
       class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
       type="button"
-      on:click={reset}
+      on:click={handleReset}
+      
     >
       Reset
     </button>

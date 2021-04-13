@@ -1,9 +1,7 @@
 <script>
   import { onMount } from "svelte";
-  // import Datepicker from "svelte-calendar";
-  import "flatpickr/dist/flatpickr.css";
-  import "flatpickr/dist/themes/material_blue.css";
-  import Flatpickr from "svelte-flatpickr";
+  import Datepicker from "svelte-calendar";
+
   export let label;
   export let value;
   export let name;
@@ -23,22 +21,9 @@
   <div
     class="input h-full w-full border-gray-3selected={date}0 px-2 transition-all border-blue rounded-sm flex items-stretch"
   >
-    <!-- <Datepicker id={label} name="name" bind:selected /> -->
-    <Flatpickr {options} {value} bind:formattedValue {name} {disabled} />
-    <!-- <Flatpickr {options} bind:value bind:formattedValue {name}>
-      <div class="flatpickr" id="my-picker">
-        <input
-          type="text"
-          placeholder="Select Date.."
-          data-input
-          bind:this={node}
-        />
+    <Datepicker id={label} name="name" bind:selected={value} />
+    <!-- <Flatpickr {options} {value} bind:formattedValue {name} {disabled} /> -->
 
-        <a class="input-button" title="clear" data-clear>
-          <i class="icon-close" />
-        </a>
-      </div></Flatpickr
-    >-->
   </div>
   <label for="name" class="absolute left-2 transition-all bg-white px-1">
     {label}

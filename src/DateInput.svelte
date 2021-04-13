@@ -15,8 +15,18 @@
     // element: "#my-picker",
   };
   let formattedValue;
-  $: date = new Date(value);
   $: console.log("valie", value);
+
+  let flatpickr;
+  export const reset = () => {
+    flatpickr.setDate(value, true);
+    // value = initialValue;
+  };
+  // let initialValue;
+  onMount(() => {
+    // initialValue = value;
+    flatpickr.setDate(value, true);
+  });
 </script>
 
 <div class="relative h-10 input-component mb-5">
@@ -24,7 +34,15 @@
     class="input h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm flex items-stretch"
   >
     <!-- <Datepicker id={label} name="name" bind:selected /> -->
-    <Flatpickr {options} {value} bind:formattedValue {name} {disabled} />
+    <Flatpickr
+      {options}
+      bind:value
+      bind:formattedValue
+      {name}
+      {disabled}
+      bind:flatpickr
+    />
+    <!-- <input type="text" name={`${name}_test`} bind:value /> -->
     <!-- <Flatpickr {options} bind:value bind:formattedValue {name}>
       <div class="flatpickr" id="my-picker">
         <input
