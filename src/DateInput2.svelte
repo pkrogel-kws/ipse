@@ -21,7 +21,7 @@
 
 <div class="relative h-10 input-component mb-5">
   <div
-    class="input h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm flex items-stretch"
+    class="input h-full w-full border-gray-3selected={date}0 px-2 transition-all border-blue rounded-sm flex items-stretch"
   >
     <!-- <Datepicker id={label} name="name" bind:selected /> -->
     <Flatpickr {options} {value} bind:formattedValue {name} {disabled} />

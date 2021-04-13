@@ -8,6 +8,7 @@
   import createImisStore from "./imisStore";
   import LoadingSpinner from "./LoadingSpinner.svelte";
   import Switch from "./Switch.svelte";
+
   export let data;
   export let handleClose;
 
@@ -46,6 +47,8 @@
     };
   });
   $: console.log("remoteValue", $remoteValue);
+
+  let checked = false;
 </script>
 
 <form use:form class="flex flex-col justify-center items-stretch min-w-xl">
@@ -78,18 +81,18 @@
       <DateInput
         label="Start"
         name="Function_Start_Date"
-        value={$data.Function_Start_Date}
+        bind:value={$data.Function_Start_Date}
       />
-      <TextInput
+      <!-- <TextInput
         label="Show PPT?"
         name="PPT_NO_SHOW"
         value={$data.PPT_NO_SHOW}
-      />
-      <!-- <Switch
-        label="Show PPT?"
-        name="PPT_NO_SHOW"
-        checked={$data.PPT_NO_SHOW}
       /> -->
+      <Switch
+        label="Hide PPT"
+        name="PPT_NO_SHOW"
+        bind:checked={$data.PPT_NO_SHOW}
+      />
     </div>
     <div
       class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"

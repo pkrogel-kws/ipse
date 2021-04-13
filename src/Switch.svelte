@@ -1,51 +1,43 @@
 <script>
   //   export let id = "";
   export let name = "";
-  export let text = "";
+  export let label = "";
   export let checked = false;
   export let disabled = false;
 </script>
 
-<label for={name}>
-  <div class="switch">
-    <input {name} type="checkbox" class="sr-only" {disabled} {checked} />
-    <div class="track" />
-    <div class="thumb" />
-  </div>
-  <span class="ml-2 cursor-pointer">{text}</span>
-</label>
+<!-- Toggle A -->
+<div class="flex items-center justify-center w-full mb-12">
+  <label for={name} class="flex items-center cursor-pointer">
+    <!-- toggle -->
+    <div class="relative">
+      <!-- input -->
+      <input
+        id={name}
+        {name}
+        type="checkbox"
+        class="sr-only"
+        {disabled}
+        bind:checked
+      />
+      <!-- line -->
+      <div class="w-10 h-4 bg-gray-400 rounded-full shadow-inner" />
+      <!-- dot -->
+      <div
+        class="dot absolute w-6 h-6 bg-white rounded-full shadow -left-1 -top-1 transition"
+      />
+    </div>
+    <!-- label -->
+    <div class="ml-3 text-gray-700 font-medium">
+      {label}
+    </div>
+  </label>
+</div>
 
 <style>
-  .switch {
-    @apply relative inline-block align-middle cursor-pointer select-none bg-transparent;
-  }
-
-  .track {
-    @apply w-12 h-6 bg-gray-600 rounded-full shadow-inner;
-  }
-
-  .thumb {
-    @apply transition-all duration-300 ease-in-out absolute top-0 left-0 w-6 h-6 bg-white border-2 border-gray-600 rounded-full;
-  }
-
-  input[type="checkbox"]:checked ~ .thumb {
-    @apply transform translate-x-full border-green-500;
-  }
-
-  input[type="checkbox"]:checked ~ .track {
-    @apply transform transition-colors bg-green-500;
-  }
-
-  input[type="checkbox"]:disabled ~ .track {
-    @apply bg-gray-500;
-  }
-
-  input[type="checkbox"]:disabled ~ .thumb {
-    @apply bg-gray-100 border-gray-500;
-  }
-
-  input[type="checkbox"]:focus + .track,
-  input[type="checkbox"]:active + .track {
-    @apply shadow-outline;
+  /* Toggle A */
+  input:checked ~ .dot {
+    transform: translateX(100%);
+    background-color: #48bb78;
   }
 </style>
