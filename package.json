@@ -1,12 +1,12 @@
 {
   "name": "ipse-imis-modal",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "homepage": "http://pkrogel-kws.github.io/ipse",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "deploy": "yarn build && gh-pages -d dist"
+    "gh-pages:deploy": "yarn build && gh-pages -d dist"
   },
   "dependencies": {
     "windicss": "^2.5.12"

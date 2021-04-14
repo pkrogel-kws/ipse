@@ -11,7 +11,7 @@ export const get = async (id) => {
   }
 
   try {
-    await fetch(`${API_URL}/?id=${id}`, {
+    let response = await fetch(`${API_URL}/?id=${id}`, {
       //parameter is based on the order of the filters
       method: "GET",
       // data: JSON.stringify(data),
@@ -21,9 +21,10 @@ export const get = async (id) => {
       //suffficient auth for users
     });
 
-    response = response.json();
+    response = await response.json();
 
     console.log("response from api", response);
+    return response;
   } catch (e) {
     console.error("encountered error during fetch/get", e);
   }
@@ -36,9 +37,7 @@ export const put = async ({ data, id, seqn }) => {
     return;
   }
 
-  const payload = generatePutPayloadFromFormData(data);
-
-  console.log("final request payload", payload);
+  console.log("final request payload", data);
 
   const RequestVerificationToken = document.getElementById(
     "__RequestVerificationToken"
@@ -50,64 +49,66 @@ export const put = async ({ data, id, seqn }) => {
   }
 
   try {
-    await fetch(`${API_URL}/~${id}|${seqn}`, {
+    let response = await fetch(`${API_URL}/~${id}|${seqn}`, {
       //parameter is based on the order of the filters
       method: "PUT",
-      data: JSON.stringify(payload),
+      body: JSON.stringify(data),
       headers: {
         RequestVerificationToken,
+        "Content-Type": "application/json",
       },
       //suffficient auth for users
     });
 
-    response = response.json();
+    response = await response.json();
 
-    console.log("response from api", response);
+    console.log("response from put api", response);
+    return response;
   } catch (e) {
     console.error("encountered error during fetch/put", e);
   }
 };
 
-const generatePutPayloadFromFormData = (data) => {
-  const values = Object.entries(data).map(([Name, Value]) => {
-    if (Value === "true" || Value === "false") {
-      Value = { $type: "System.Boolean", $value: Value };
-    }
-    return {
-      $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-      Name,
-      Value,
-    };
-  });
+// const generatePutPayloadFromFormData = (data) => {
+//   const values = Object.entries(data).map(([Name, Value]) => {
+//     if (Value === "true" || Value === "false") {
+//       Value = { $type: "System.Boolean", $value: Value };
+//     }
+//     return {
+//       $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+//       Name,
+//       Value,
+//     };
+//   });
 
-  return {
-    $type: "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
-    EntityTypeName: "CsISPE_Event_Speakers",
-    PrimaryParentEntityTypeName: "Party",
-    Identity: {
-      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-      EntityTypeName: "CsISPE_Event_Speakers",
-      IdentityElements: {
-        $type:
-          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-        $values: [data.ID, data.SEQN],
-      },
-    },
-    PrimaryParentIdentity: {
-      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-      EntityTypeName: "Party",
-      IdentityElements: {
-        $type:
-          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-        $values: [data.ID],
-      },
-    },
-    Properties: {
-      $type:
-        "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
-      $values: values,
-    },
-  };
-};
+//   return {
+//     $type: "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
+//     EntityTypeName: "CsISPE_Event_Speakers",
+//     PrimaryParentEntityTypeName: "Party",
+//     Identity: {
+//       $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+//       EntityTypeName: "CsISPE_Event_Speakers",
+//       IdentityElements: {
+//         $type:
+//           "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+//         $values: [data.ID, data.SEQN],
+//       },
+//     },
+//     PrimaryParentIdentity: {
+//       $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+//       EntityTypeName: "Party",
+//       IdentityElements: {
+//         $type:
+//           "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+//         $values: [data.ID],
+//       },
+//     },
+//     Properties: {
+//       $type:
+//         "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
+//       $values: values,
+//     },
+//   };
+// };
 
 export default { get, put };

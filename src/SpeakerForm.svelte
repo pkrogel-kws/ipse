@@ -47,7 +47,7 @@
   //TODO:implement some form of dirty check
   $: canSave = !!Object.values($touched).filter((t) => !!t).length;
 
-  // $: console.log($formData, "formData");
+  $: console.log($formData, "formDataChanged");
 
   let resetEnd, resetStart;
 
@@ -72,7 +72,7 @@
 
 </script>
 
-<form use:form class="flex flex-col justify-center items-stretch min-w-xl">
+<form use:form class="flex flex-col justify-center items-stretch min-w-3xl">
   {#if $remoteValue?.loading}
     <div class="inset-0 opacity-50 absolute bg-white z-1">
       <LoadingSpinner />

@@ -12,6 +12,7 @@
   let headers = [];
   const modalStore = store(false);
   const data = writable();
+  $: console.log($data, "parsed data from row");
 
   let rowClickListeners = [];
 
@@ -46,6 +47,11 @@
     const config = { attributes: false, childList: true, subtree: true };
 
     const callback = function (mutationsList, observer) {
+      headers = [
+        ...document.querySelectorAll(
+          ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
+        ),
+      ].map((elem) => elem.getAttribute("aria-label"));
       removeRowClickEventListeners();
       addClickHandlersToRows();
     };
@@ -70,6 +76,7 @@
     );
     const data = {};
     dataCells.forEach((val, index) => {
+      console.log({ val, index }, "dc-i");
       data[headers[index]] = val;
     });
     console.log("dataCells", dataCells);
@@ -82,7 +89,7 @@
         ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
       ),
     ].map((elem) => elem.getAttribute("aria-label"));
-
+    console.log("headers set to", headers);
     addClickHandlersToRows();
     const removeMutationObserver = setupMutationObserver();
     return () => {
@@ -93,11 +100,8 @@
 </script>
 
 <Modal store={modalStore}>
-  <div
-    slot="header"
-    class="bg-primary flex flex-row align-center px-8 py-8 text-white"
-  >
-    <h1>Update Speaker</h1>
+  <div slot="header" class="bg-primary flex flex-row align-center px-8 py-4">
+    <h1 class="text-white text-lg">Update Speaker</h1>
     <div class="flex-grow" />
     <CloseIcon onClick={modalStore.close} />
   </div>

@@ -7,7 +7,7 @@ export const get = async (id) => {
 
 export const put = async ({ data, id, seqn }) => {
   console.log("mock data put", data);
-  console.log("mock data put JSON", JSON.stringify(data));
+  // console.log("mock data put JSON", JSON.stringify(data));
 
   const API_URL = "/iMIS/api/CsISPE_Event_Speakers";
 

@@ -15,7 +15,6 @@
     // element: "#my-picker",
   };
   let formattedValue;
-  $: console.log("valie", value);
 
   let flatpickr;
   export const reset = () => {
