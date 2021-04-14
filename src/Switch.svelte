@@ -7,7 +7,7 @@
 </script>
 
 <!-- Toggle A -->
-<div class="flex items-center justify-center w-full mb-12">
+<div class="flex items-center w-full h-10">
   <label for={name} class="flex items-center cursor-pointer">
     <!-- toggle -->
     <div class="relative">
