@@ -757,6 +757,11 @@ svelte-flatpickr@^3.1.0:
   dependencies:
     flatpickr "^4.5.2"
 
+svelte-formula@^0.11.0:
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/svelte-formula/-/svelte-formula-0.11.0.tgz#f1e9b07ae008af9d9a66688f02bdc75df69086e9"
+  integrity sha512-xsDNYyg87Snl8eiWgvEAmWfaq9DuBukeRpT5S34Is3ewHzDXUQVIR5kvGeNwGLekOrzHFcNaCWL/qeb8+zSRPg==
+
 svelte-hmr@^0.13.0, svelte-hmr@^0.13.3:
   version "0.13.3"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.13.3.tgz"

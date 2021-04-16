@@ -19,6 +19,25 @@ export const put = async ({ data, id, seqn }) => {
       method: "PUT",
       data: '${JSON.stringify(data)}',
       headers: {
+        "RequestVerificationToken": document.getElementById("__RequestVerificationToken")?.value,
+        "Content-Type": "application/json"
+      },
+    }).then(response=>response.json()).then(console.log);`;
+  console.log(fetchCall);
+  await timeout(3000);
+  return data;
+};
+
+export const del = async ({ id, seqn }) => {
+  const API_URL = "/iMIS/api/CsISPE_Event_Speakers";
+
+  console.log(`${API_URL}/~${id}|${seqn}`, "*");
+
+  // const payload = generatePutPayloadFromFormData(data);
+
+  const fetchCall = `    fetch('${API_URL}/~${id}|${seqn}', {
+      method: "DEL",
+      headers: {
         "RequestVerificationToken": document.getElementById("__RequestVerificationToken")?.value
       },
     }).then(response=>response.json()).then(console.log);`;
@@ -30,41 +49,4 @@ const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-const generatePutPayloadFromFormData = (data) => {
-  const values = Object.entries(data).map(([Name, Value]) => ({
-    $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-    Name,
-    Value,
-  }));
-
-  return {
-    $type: "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
-    EntityTypeName: "CsISPE_Event_Speakers",
-    PrimaryParentEntityTypeName: "Party",
-    Identity: {
-      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-      EntityTypeName: "CsISPE_Event_Speakers",
-      IdentityElements: {
-        $type:
-          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-        $values: [data.ID, data.SEQN],
-      },
-    },
-    PrimaryParentIdentity: {
-      $type: "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-      EntityTypeName: "Party",
-      IdentityElements: {
-        $type:
-          "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-        $values: [data.ID],
-      },
-    },
-    Properties: {
-      $type:
-        "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
-      $values: values,
-    },
-  };
-};
-
-export default { get, put };
+export default { get, put, del };

@@ -69,6 +69,37 @@ export const put = async ({ data, id, seqn }) => {
   }
 };
 
+//SEQN is unique ID
+export const del = async ({ id, seqn }) => {
+  const RequestVerificationToken = document.getElementById(
+    "__RequestVerificationToken"
+  )?.value;
+
+  if (!RequestVerificationToken) {
+    console.error("couldn't find request verification token");
+    return;
+  }
+
+  try {
+    let response = await fetch(`${API_URL}/~${id}|${seqn}`, {
+      //parameter is based on the order of the filters
+      method: "DELETE",
+      headers: {
+        RequestVerificationToken,
+        // "Content-Type": "application/json",
+      },
+      //suffficient auth for users
+    });
+
+    response = await response.json();
+
+    console.log("response from put api", response);
+    return response;
+  } catch (e) {
+    console.error("encountered error during fetch/put", e);
+  }
+};
+
 // const generatePutPayloadFromFormData = (data) => {
 //   const values = Object.entries(data).map(([Name, Value]) => {
 //     if (Value === "true" || Value === "false") {
@@ -111,4 +142,4 @@ export const put = async ({ data, id, seqn }) => {
 //   };
 // };
 
-export default { get, put };
+export default { get, put, del };

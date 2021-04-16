@@ -8,6 +8,7 @@
   export let value;
   export let name;
   export let disabled;
+  export let update;
 
   let node;
   export let options = {
@@ -26,6 +27,13 @@
     // initialValue = value;
     flatpickr.setDate(value, true);
   });
+
+  $: {
+    update((vals) => ({ ...vals, [name]: value }));
+  }
+  // $: {
+  //   updateForm({ [name]: value });
+  // }
 </script>
 
 <div class="relative h-10 input-component mb-5">
@@ -37,11 +45,11 @@
       {options}
       bind:value
       bind:formattedValue
-      {name}
+      name={`${name}_formatted`}
       {disabled}
       bind:flatpickr
     />
-    <!-- <input type="text" name={`${name}_test`} bind:value /> -->
+    <input type="text" {name} bind:value readonly style="display:none;" />
     <!-- <Flatpickr {options} bind:value bind:formattedValue {name}>
       <div class="flatpickr" id="my-picker">
         <input

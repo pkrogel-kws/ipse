@@ -21,9 +21,9 @@ const createStore = async (id) => {
     data: currentData,
   });
 
-  const newSet = async (formData) => {
+  const put = async (formData) => {
     update((data) => {
-      delete data.errors;
+      delete data?.errors;
       data.loading = true;
 
       return data;
@@ -44,7 +44,34 @@ const createStore = async (id) => {
     //TODO:handle errors here
     set(response);
   };
-  return { subscribe, set: newSet };
+
+  const del = async (formData) => {
+    update((data) => {
+      delete data?.errors;
+      data.loading = true;
+
+      return data;
+    });
+    let response = await api.del({ seqn, id });
+    //TODO:handle errors here
+    set(response);
+  };
+
+  const clear = () => {
+    set({
+      ID: "",
+      Event_Code: "",
+      Function_Code: "",
+      Function_Start_Date: null,
+      Function_End_Date: null,
+      PPT_NO_SHOW: null,
+      Role: null,
+      Presentation_Title: null,
+      Presentation_Desc: null,
+      Track: null,
+    });
+  };
+  return { subscribe, del, put, clear };
 };
 
 const extractValuesFromResponse = (response) => {
@@ -66,7 +93,7 @@ const patchPayload = (payload, values) => {
     if (!newVal) {
       return;
     }
-    // console.log(`patching `, { Name, Value, idx, newVal });
+    console.log(`patching `, { Name, Value, idx, newVal });
     if (Value.$value !== undefined) {
       // console.log(
       //   "[before] payload.Properties.$values[idx]=",

@@ -4,11 +4,13 @@
   import Modal, { store } from "./modal";
   import CloseIcon from "./CloseButton.svelte";
   import SpeakerForm from "./SpeakerForm.svelte";
+  import AddButton from "./AddButton.svelte";
 
   const ROW_CLICK_EVENT_TYPE = "dblclick";
   const MUTATION_OBSERVER_NODE_ID =
     "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ListerPanel";
-
+  const ADD_BTN_GROUP_ID =
+    "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ResultsGrid_TopRightPanel";
   let headers = [];
   const modalStore = store(false);
   const data = writable();
@@ -47,11 +49,8 @@
     const config = { attributes: false, childList: true, subtree: true };
 
     const callback = function (mutationsList, observer) {
-      headers = [
-        ...document.querySelectorAll(
-          ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
-        ),
-      ].map((elem) => elem.getAttribute("aria-label"));
+      getHeaders();
+      setupAddButton();
       removeRowClickEventListeners();
       addClickHandlersToRows();
     };
@@ -76,37 +75,80 @@
     );
     const data = {};
     dataCells.forEach((val, index) => {
-      console.log({ val, index }, "dc-i");
+      // console.log({ val, index }, "dc-i");
       data[headers[index]] = val;
     });
-    console.log("dataCells", dataCells);
+    // console.log("dataCells", dataCells);
     return data;
   };
 
-  onMount(() => {
+  const getHeaders = () => {
     headers = [
       ...document.querySelectorAll(
         ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
       ),
     ].map((elem) => elem.getAttribute("aria-label"));
     console.log("headers set to", headers);
+  };
+
+  const setupAddButton = () => {
+    if (document.getElementById("addSpeakerBtn")) {
+      return;
+    }
+    const buttonContainer = document.getElementById(ADD_BTN_GROUP_ID);
+    const addBtn = new AddButton({
+      target: buttonContainer,
+      props: { onClick: handleClickAddBtn },
+    });
+  };
+
+  const handleClickAddBtn = () => {
+    $data = {
+      ID: "",
+      Event_Code: "",
+      Function_Code: "",
+      Function_Start_Date: null,
+      Function_End_Date: null,
+      PPT_NO_SHOW: null,
+      Role: null,
+      Presentation_Title: null,
+      Presentation_Desc: null,
+      Track: null,
+    };
+    modalStore.open();
+  };
+
+  onMount(() => {
+    getHeaders();
     addClickHandlersToRows();
+    setupAddButton();
     const removeMutationObserver = setupMutationObserver();
     return () => {
       removeRowClickEventListeners();
       removeMutationObserver();
     };
   });
+  let modalTitle;
+  $: {
+    if ($data && $data.ID) {
+      modalTitle = "Update Speaker";
+    } else {
+      modalTitle = "New Speaker";
+    }
+  }
 </script>
 
 <Modal store={modalStore}>
-  <div slot="header" class="bg-primary flex flex-row align-center px-8 py-4">
-    <h1 class="text-white text-lg">Update Speaker</h1>
+  <div
+    slot="header"
+    class="bg-primary flex flex-row align-center px-8 py-4 text-white"
+  >
+    <h1 class="text-white text-lg">{modalTitle}</h1>
     <div class="flex-grow" />
     <CloseIcon onClick={modalStore.close} />
   </div>
   <div slot="content" class="mx-8 relative">
-    <SpeakerForm {data} handleClose={modalStore.close} />
+    <SpeakerForm {data} closeModal={modalStore.close} />
   </div>
   <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>
     <button
