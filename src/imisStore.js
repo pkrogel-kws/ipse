@@ -7,32 +7,17 @@ const createStore = async (id, seqn) => {
   console.log("creating imis store for ", { id, seqn });
   let response = await api.get(id, seqn);
 
-  let currentData = null;
-  let error = false;
-  if (response.error) {
-    error = response.error;
-  } else {
-    currentData = extractValuesFromResponse(response);
-  }
-
-  // const currentData = response;
-  // const seqn = currentData.Properties.$values.filter(
-  //   ({ Name }) => Name === "SEQN"
-  // )[0].Value.$value;
-
-  console.log("currentData", currentData);
   const { subscribe, set, update } = writable({
     loading: false,
     response,
-    data: currentData,
-    error,
+    data: response.error ? {} : extractValuesFromResponse(response),
+    error: response.error || false,
   });
 
   const put = async (formData) => {
     update((data) => {
-      delete data?.errors;
+      delete data?.error;
       data.loading = true;
-
       return data;
     });
 
@@ -45,26 +30,34 @@ const createStore = async (id, seqn) => {
     // const payload = { ...item };
     // payload.Properties.$values = values;
     let payload = patchPayload(response, formData);
-    // let payload = patchPayload(currentData, formData);
     payload = replaceEmptyValuesInPayload(payload);
     payload = removeFieldFromPayload("Date_Modified", payload);
     console.log("repaired payload ", payload);
 
     response = await api.put({ data: payload, seqn, id });
     //TODO:handle errors here
-    set(response);
+    set({
+      loading: false,
+      response,
+      data: response.error ? {} : extractValuesFromResponse(response),
+      error: response.error || false,
+    });
   };
 
   const del = async (formData) => {
     update((data) => {
-      delete data?.errors;
+      delete data?.error;
       data.loading = true;
-
       return data;
     });
     let response = await api.del({ seqn, id });
-    //TODO:handle errors here
-    set(response);
+    set({
+      loading: false,
+      response,
+      data: {},
+      error: response.error || false,
+    });
+    //TODO: close modal
   };
 
   const clear = () => {
