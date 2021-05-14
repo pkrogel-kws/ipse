@@ -1,17 +1,16 @@
 // console.log(basePayload, "basePayload.json");
 
 const API_URL = "/iMIS/api/CsISPE_Event_Speakers";
-export const get = async (id) => {
-  const RequestVerificationToken = document.getElementById(
-    "__RequestVerificationToken"
-  )?.value;
-  if (!RequestVerificationToken) {
-    console.error("couldn't find request verification token");
-    return;
-  }
-
+export const get = async (id, seqn) => {
   try {
-    let response = await fetch(`${API_URL}/?id=${id}`, {
+    const RequestVerificationToken = document.getElementById(
+      "__RequestVerificationToken"
+    )?.value;
+    if (!RequestVerificationToken) {
+      throw "couldn't find __RequestVerificationToken";
+      return;
+    }
+    let response = await fetch(`${API_URL}/~${id}|${seqn}`, {
       //parameter is based on the order of the filters
       method: "GET",
       // data: JSON.stringify(data),
@@ -27,28 +26,23 @@ export const get = async (id) => {
     return response;
   } catch (e) {
     console.error("encountered error during fetch/get", e);
+    return {
+      error: `Encountered error during GET for ${id}|${seqn}, check console for details.`,
+    };
   }
 };
 
 //SEQN is unique ID
 export const put = async ({ data, id, seqn }) => {
-  if (!data) {
-    console.error("API-put did not receive data from form");
-    return;
-  }
-
-  console.log("final request payload", data);
-
-  const RequestVerificationToken = document.getElementById(
-    "__RequestVerificationToken"
-  )?.value;
-
-  if (!RequestVerificationToken) {
-    console.error("couldn't find request verification token");
-    return;
-  }
-
   try {
+    const RequestVerificationToken = document.getElementById(
+      "__RequestVerificationToken"
+    )?.value;
+    if (!RequestVerificationToken) {
+      throw "couldn't find __RequestVerificationToken";
+      return;
+    }
+
     let response = await fetch(`${API_URL}/~${id}|${seqn}`, {
       //parameter is based on the order of the filters
       method: "PUT",
@@ -66,21 +60,23 @@ export const put = async ({ data, id, seqn }) => {
     return response;
   } catch (e) {
     console.error("encountered error during fetch/put", e);
+    return {
+      error: `Encountered error during PUT for ${id}|${seqn}, check console for details.`,
+    };
   }
 };
 
 //SEQN is unique ID
 export const del = async ({ id, seqn }) => {
-  const RequestVerificationToken = document.getElementById(
-    "__RequestVerificationToken"
-  )?.value;
-
-  if (!RequestVerificationToken) {
-    console.error("couldn't find request verification token");
-    return;
-  }
-
   try {
+    const RequestVerificationToken = document.getElementById(
+      "__RequestVerificationToken"
+    )?.value;
+    if (!RequestVerificationToken) {
+      throw "couldn't find __RequestVerificationToken";
+      return;
+    }
+
     let response = await fetch(`${API_URL}/~${id}|${seqn}`, {
       //parameter is based on the order of the filters
       method: "DELETE",
@@ -96,7 +92,10 @@ export const del = async ({ id, seqn }) => {
     console.log("response from put api", response);
     return response;
   } catch (e) {
-    console.error("encountered error during fetch/put", e);
+    console.error("encountered error during fetch/del", e);
+    return {
+      error: `Encountered error during DELETE for ${id}|${seqn}, check console for details.`,
+    };
   }
 };
 

@@ -3,22 +3,29 @@ import { getApi } from "./api";
 
 const api = getApi();
 
-const createStore = async (id) => {
-  console.log("creating imis store for " + id);
-  let response = await api.get(id);
+const createStore = async (id, seqn) => {
+  console.log("creating imis store for ", { id, seqn });
+  let response = await api.get(id, seqn);
 
-  const item = response.Items.$values[0];
-  // const currentData = extractValuesFromResponse(response);
-  const currentData = response.Items.$values[0];
-  const seqn = currentData.Properties.$values.filter(
-    ({ Name }) => Name === "SEQN"
-  )[0].Value.$value;
+  let currentData = null;
+  let error = false;
+  if (response.error) {
+    error = response.error;
+  } else {
+    currentData = extractValuesFromResponse(response);
+  }
+
+  // const currentData = response;
+  // const seqn = currentData.Properties.$values.filter(
+  //   ({ Name }) => Name === "SEQN"
+  // )[0].Value.$value;
 
   console.log("currentData", currentData);
   const { subscribe, set, update } = writable({
     loading: false,
     response,
     data: currentData,
+    error,
   });
 
   const put = async (formData) => {
@@ -37,8 +44,11 @@ const createStore = async (id) => {
 
     // const payload = { ...item };
     // payload.Properties.$values = values;
-    const payload = patchPayload(currentData, formData);
-    console.log("patch?EPayload", payload);
+    let payload = patchPayload(response, formData);
+    // let payload = patchPayload(currentData, formData);
+    payload = replaceEmptyValuesInPayload(payload);
+    payload = removeFieldFromPayload("Date_Modified", payload);
+    console.log("repaired payload ", payload);
 
     response = await api.put({ data: payload, seqn, id });
     //TODO:handle errors here
@@ -76,7 +86,7 @@ const createStore = async (id) => {
 
 const extractValuesFromResponse = (response) => {
   const retVal = {};
-  response.Items.$values[0].Properties.$values.forEach(({ Name, Value }) => {
+  response.Properties.$values.forEach(({ Name, Value }) => {
     if (typeof Value === "object") {
       retVal[Name] = Value.$value;
     } else {
@@ -95,27 +105,52 @@ const patchPayload = (payload, values) => {
     }
     console.log(`patching `, { Name, Value, idx, newVal });
     if (Value.$value !== undefined) {
-      // console.log(
-      //   "[before] payload.Properties.$values[idx]=",
-      //   payload.Properties.$values[idx]
-      // );
       payload.Properties.$values[idx] = { ...Value, $value: newVal };
-      // console.log(
-      //   "[after] payload.Properties.$values[idx]=",
-      //   payload.Properties.$values[idx]
-      // );
       return;
     }
-    //string
-    // console.log(
-    //   "[before] payload.Properties.$values[idx]=",
-    //   payload.Properties.$values[idx]
-    // );
     payload.Properties.$values[idx].Value = newVal;
-    // console.log(
-    //   "[after] payload.Properties.$values[idx]=",
-    //   payload.Properties.$values[idx]
-    // );
+  });
+  return payload;
+};
+
+const propertiesToCheck = [
+  "Abstract",
+  "Assistant_Info",
+  "File_Location",
+  "Function_Code",
+  "Recording",
+  "UC_1",
+  "UC_2",
+];
+const replaceEmptyValuesInPayload = (payload) => {
+  payload.Properties.$values.forEach(({ Name, Value }, idx) => {
+    if (propertiesToCheck.includes(Name)) {
+      // if (Value.$value !== undefined && Value.$value === "") {
+      //   console.log(`repairing `, { Name, Value, idx });
+
+      //   payload.Properties.$values[idx].$value = { ...Value, $value: "TEST" };
+      //   //we need to pick replacement value based on field type
+      //   return;
+      // }
+      if (Value === "") {
+        console.log(`repairing `, { Name, Value, idx });
+
+        payload.Properties.$values[idx].Value = "TEST";
+        return;
+      }
+    }
+  });
+  return payload;
+};
+
+const removeFieldFromPayload = (fieldName, payload) => {
+  payload.Properties.$values.forEach(({ Name, Value }, idx) => {
+    if (Name === fieldName) {
+      console.log(`removing `, { Name, Value, idx });
+
+      delete payload.Properties.$values[idx];
+      return;
+    }
   });
   return payload;
 };

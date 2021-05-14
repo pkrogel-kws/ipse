@@ -7,7 +7,7 @@
     "EntityTypeName": "CsISPE_Event_Speakers",
     "IdentityElements": {
       "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-      "$values": ["1000106", "667569"]
+      "$values": ["1008892", "1919"]
     }
   },
   "PrimaryParentIdentity": {
@@ -15,7 +15,7 @@
     "EntityTypeName": "Party",
     "IdentityElements": {
       "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-      "$values": ["1000106"]
+      "$values": ["1008892"]
     }
   },
   "Properties": {
@@ -29,10 +29,7 @@
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Agreement",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": true
-        }
+        "Value": { "$type": "System.Boolean", "$value": false }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
@@ -42,95 +39,72 @@
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Date_Modified",
-        "Value": "2016-06-17T10:48:44.55"
+        "Value": "2015-03-05T09:13:11.25"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Event_Code",
-        "Value": "NA16CEDEC1"
+        "Value": "NA15CEJUN1"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "File_Location",
-        "Value": "http://www.ispe.org/multimedia/conference-handouts/na16cedec1/Hall_NA16CEDEC1_Meeting-the-Capacity-Challenge-Vacaville-CCP2-Return-to-Service-Projects.pdf"
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Function_Code",
-        "Value": "SES103B"
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Function_End_Date",
-        "Value": "2016-12-05T14:30:00"
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Function_Start_Date",
-        "Value": "2016-12-05T13:00:00"
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "ID",
-        "Value": "1000106"
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Invited",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Packet_Sent",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": true
-        }
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "PPT_NO_SHOW",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "PPT_Received",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": true
-        }
-      },
-      {
-        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-        "Name": "Presentation_Desc",
         "Value": ""
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Code",
+        "Value": "SES106"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_End_Date",
+        "Value": "2015-06-02T10:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Start_Date",
+        "Value": "2015-06-02T09:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "ID",
+        "Value": "1008892"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Invited",
+        "Value": { "$type": "System.Boolean", "$value": false }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Packet_Sent",
+        "Value": { "$type": "System.Boolean", "$value": true }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_NO_SHOW",
+        "Value": { "$type": "System.Boolean", "$value": false }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_Received",
+        "Value": { "$type": "System.Boolean", "$value": false }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Presentation_Received",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
+        "Value": { "$type": "System.Boolean", "$value": false }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Presentation_Title",
-        "Value": "Meeting the Capacity Challenge- Vacaville CCP2 Return to Service Projects"
+        "Value": "Welcome and Opening Remarks"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Record",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
+        "Value": { "$type": "System.Boolean", "$value": false }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
@@ -140,18 +114,12 @@
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Registered",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
+        "Value": { "$type": "System.Boolean", "$value": false }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Removed",
-        "Value": {
-          "$type": "System.Boolean",
-          "$value": false
-        }
+        "Value": { "$type": "System.Boolean", "$value": false }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
@@ -161,38 +129,35 @@
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Role",
-        "Value": "SPKR"
+        "Value": "LDR"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "SEQN",
-        "Value": {
-          "$type": "System.Int32",
-          "$value": 667569
-        }
+        "Value": { "$type": "System.Int32", "$value": 1919 }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "TIME_STAMP",
         "Value": {
           "$type": "System.Byte[], mscorlib",
-          "$value": "AAAAACnCqWg="
+          "$value": "AAAAACnCqlQ="
         }
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "Track",
-        "Value": "TECHNOLOGY SOLUTIONS TO MEET CAPACITY CHALLENGES"
+        "Value": ""
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "UC_1",
-        "Value": "Monday 12/5/2016"
+        "Value": "Tuesday 6/2/2015"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "UC_2",
-        "Value": "Monday 12/5/2016"
+        "Value": "Tuesday 6/2/2015"
       },
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
@@ -207,10 +172,12 @@
       {
         "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         "Name": "UN_1",
-        "Value": {
-          "$type": "System.Double",
-          "$value": 0
-        }
+        "Value": { "$type": "System.Double", "$value": 0.0 }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Desc",
+        "Value": ""
       }
     ]
   }

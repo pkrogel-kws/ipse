@@ -105,6 +105,7 @@
   const handleClickAddBtn = () => {
     $data = {
       ID: "",
+      SEQN: "",
       Event_Code: "",
       Function_Code: "",
       Function_Start_Date: null,

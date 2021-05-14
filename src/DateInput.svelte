@@ -73,6 +73,7 @@
 <style>
   :global(.flatpickr-input) {
     width: 100%;
+    background: white !important;
   }
   label {
     top: 0%;

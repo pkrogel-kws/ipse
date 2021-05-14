@@ -1,449 +1,217 @@
 {
-  "$type": "Asi.Soa.Core.DataContracts.PagedResult`1[[Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts]], Asi.Contracts",
-  "Items": {
-    "$type": "System.Collections.Generic.List`1[[Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts]], mscorlib",
+  "$type": "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
+  "EntityTypeName": "CsISPE_Event_Speakers",
+  "PrimaryParentEntityTypeName": "Party",
+  "Identity": {
+    "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+    "EntityTypeName": "CsISPE_Event_Speakers",
+    "IdentityElements": {
+      "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+      "$values": ["1000263", "668637"]
+    }
+  },
+  "PrimaryParentIdentity": {
+    "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+    "EntityTypeName": "Party",
+    "IdentityElements": {
+      "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+      "$values": ["1000263"]
+    }
+  },
+  "Properties": {
+    "$type": "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
     "$values": [
       {
-        "$type": "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
-        "EntityTypeName": "CsISPE_Event_Speakers",
-        "PrimaryParentEntityTypeName": "Party",
-        "Identity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "CsISPE_Event_Speakers",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000263", "668637"]
-          }
-        },
-        "PrimaryParentIdentity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "Party",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000263"]
-          }
-        },
-        "Properties": {
-          "$type": "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
-          "$values": [
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Abstract",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Agreement",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Assistant_Info",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Date_Modified",
-              "Value": "2017-10-19T11:04:18.493"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Event_Code",
-              "Value": "NA17CEOCT1"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "File_Location",
-              "Value": "https://www2.ispe.org/imis/conference-handouts/NA17CEOCT1/Canterbury_NA17CEOCT1_How-Blockchain-May-Change-the-Way-We-Think-about-Data-Integrity.pdf"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Code",
-              "Value": "SES309"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_End_Date",
-              "Value": "2017-11-01T10:45:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Start_Date",
-              "Value": "2017-11-01T09:45:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "ID",
-              "Value": "1000263"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Invited",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Packet_Sent",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_NO_SHOW",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Desc",
-              "Value": "<br/>Speaker: James Canterbury<br>\r\nDescription:<br>\r\nThe concept of a distributed ledger that is accepted as the truth by all of participants in a network can change the way we manage, verify, and trust data. Eliminating a central authority (i.e., a database or centrally managed cloud environment) removes our reliance on a single system of record, as well as the vulnerability of being able to alter the truth. Blockchain is a foundational technology based on the concepts of distributed computing. Its primary use in industry to date has been through the bitcoin network, however, the application of Blockchain to healthcare and life sciences is actively be explored.<br/><br/>"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Title",
-              "Value": "How Blockchain May Change the Way We Think about Data Integrity"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Record",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Recording",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Registered",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed_Date",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Role",
-              "Value": "SPKR"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "SEQN",
-              "Value": {
-                "$type": "System.Int32",
-                "$value": 668637
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "TIME_STAMP",
-              "Value": {
-                "$type": "System.Byte[], mscorlib",
-                "$value": "AAAAACnCqW0="
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Track",
-              "Value": "INFORMATION SYSTEMS"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_1",
-              "Value": "Wednesday 11/1/2017"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_2",
-              "Value": "Wednesday 11/1/2017"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_1",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_2",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UN_1",
-              "Value": {
-                "$type": "System.Double",
-                "$value": 0
-              }
-            }
-          ]
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Abstract",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Agreement",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
         }
       },
       {
-        "$type": "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
-        "EntityTypeName": "CsISPE_Event_Speakers",
-        "PrimaryParentEntityTypeName": "Party",
-        "Identity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "CsISPE_Event_Speakers",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000263", "669556"]
-          }
-        },
-        "PrimaryParentIdentity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "Party",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000263"]
-          }
-        },
-        "Properties": {
-          "$type": "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
-          "$values": [
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Abstract",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Agreement",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Assistant_Info",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Date_Modified",
-              "Value": "2018-07-18T09:21:09.94"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Event_Code",
-              "Value": "NA18CENOV1"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "File_Location",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Code",
-              "Value": "SES210"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_End_Date",
-              "Value": "2018-11-05T15:15:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Start_Date",
-              "Value": "2018-11-05T13:45:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "ID",
-              "Value": "1000263"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Invited",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Packet_Sent",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_NO_SHOW",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Desc",
-              "Value": "<br />Speaker: James Canterbury<br />There is a lot of hype around blockchain and distributed ledger technologies, but will it really revolutionize the way we trust and share data? Yes! maybe? In this session we will provide a short overview of the technology, a demonstration of what it actually does, and present use cases of biopharma companies that have been experimenting with it – including lessons learned of what works, and what challenges can we expect."
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Title",
-              "Value": "Blockchain- reshaping the way we share and trust data"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Record",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Recording",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Registered",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed_Date",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Role",
-              "Value": "SPKR"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "SEQN",
-              "Value": {
-                "$type": "System.Int32",
-                "$value": 669556
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "TIME_STAMP",
-              "Value": {
-                "$type": "System.Byte[], mscorlib",
-                "$value": "AAAAACuSNpQ="
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Track",
-              "Value": "Information Systems Track"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_1",
-              "Value": "Monday 11/5/2018"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_2",
-              "Value": "Monday 11/5/2018"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_1",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_2",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UN_1",
-              "Value": {
-                "$type": "System.Double",
-                "$value": 0
-              }
-            }
-          ]
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Assistant_Info",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Date_Modified",
+        "Value": "2017-10-19T11:04:18.493"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Event_Code",
+        "Value": "NA17CEOCT1"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "File_Location",
+        "Value": "https://www2.ispe.org/imis/conference-handouts/NA17CEOCT1/Canterbury_NA17CEOCT1_How-Blockchain-May-Change-the-Way-We-Think-about-Data-Integrity.pdf"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Code",
+        "Value": "SES309"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_End_Date",
+        "Value": "2017-11-01T10:45:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Start_Date",
+        "Value": "2017-11-01T09:45:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "ID",
+        "Value": "1000263"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Invited",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Packet_Sent",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_NO_SHOW",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_Received",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Desc",
+        "Value": "<br/>Speaker: James Canterbury<br>\r\nDescription:<br>\r\nThe concept of a distributed ledger that is accepted as the truth by all of participants in a network can change the way we manage, verify, and trust data. Eliminating a central authority (i.e., a database or centrally managed cloud environment) removes our reliance on a single system of record, as well as the vulnerability of being able to alter the truth. Blockchain is a foundational technology based on the concepts of distributed computing. Its primary use in industry to date has been through the bitcoin network, however, the application of Blockchain to healthcare and life sciences is actively be explored.<br/><br/>"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Received",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Title",
+        "Value": "How Blockchain May Change the Way We Think about Data Integrity"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Record",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Recording",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Registered",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Removed",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Removed_Date",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Role",
+        "Value": "SPKR"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "SEQN",
+        "Value": {
+          "$type": "System.Int32",
+          "$value": 668637
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "TIME_STAMP",
+        "Value": {
+          "$type": "System.Byte[], mscorlib",
+          "$value": "AAAAACnCqW0="
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Track",
+        "Value": "INFORMATION SYSTEMS"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UC_1",
+        "Value": "Wednesday 11/1/2017"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UC_2",
+        "Value": "Wednesday 11/1/2017"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UD_1",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UD_2",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UN_1",
+        "Value": {
+          "$type": "System.Double",
+          "$value": 0
         }
       }
     ]
-  },
-  "Offset": 0,
-  "Limit": 100,
-  "Count": 2,
-  "TotalCount": 2,
-  "NextPageLink": null,
-  "HasNext": false,
-  "NextOffset": 0
+  }
 }

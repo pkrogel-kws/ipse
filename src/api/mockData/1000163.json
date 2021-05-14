@@ -1,232 +1,217 @@
 {
-  "$type": "Asi.Soa.Core.DataContracts.PagedResult`1[[Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts]], Asi.Contracts",
-  "Items": {
-    "$type": "System.Collections.Generic.List`1[[Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts]], mscorlib",
+  "$type": "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
+  "EntityTypeName": "CsISPE_Event_Speakers",
+  "PrimaryParentEntityTypeName": "Party",
+  "Identity": {
+    "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+    "EntityTypeName": "CsISPE_Event_Speakers",
+    "IdentityElements": {
+      "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+      "$values": ["1000163", "666677"]
+    }
+  },
+  "PrimaryParentIdentity": {
+    "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
+    "EntityTypeName": "Party",
+    "IdentityElements": {
+      "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+      "$values": ["1000163"]
+    }
+  },
+  "Properties": {
+    "$type": "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
     "$values": [
       {
-        "$type": "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
-        "EntityTypeName": "CsISPE_Event_Speakers",
-        "PrimaryParentEntityTypeName": "Party",
-        "Identity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "CsISPE_Event_Speakers",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000163", "666677"]
-          }
-        },
-        "PrimaryParentIdentity": {
-          "$type": "Asi.Soa.Core.DataContracts.IdentityData, Asi.Contracts",
-          "EntityTypeName": "Party",
-          "IdentityElements": {
-            "$type": "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
-            "$values": ["1000163"]
-          }
-        },
-        "Properties": {
-          "$type": "Asi.Soa.Core.DataContracts.GenericPropertyDataCollection, Asi.Contracts",
-          "$values": [
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Abstract",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Agreement",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Assistant_Info",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Date_Modified",
-              "Value": "2015-07-28T13:28:08.737"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Event_Code",
-              "Value": "NA15CENOV"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "File_Location",
-              "Value": "http://www.ispe.org/multimedia/conference-handouts/na15cenov/Marschel_Gardner_NA15CENOV_Bedside-Manners-Using-ISPEs-Patient-Survey-Data-to-Improve-Patient-Experiences.pdf"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Code",
-              "Value": "SES5-501"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_End_Date",
-              "Value": "2015-11-09T10:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Function_Start_Date",
-              "Value": "2015-11-09T08:30:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "ID",
-              "Value": "1000163"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Invited",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Packet_Sent",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_NO_SHOW",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "PPT_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": true
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Desc",
-              "Value": "<p><strong>Problem or Opportunity Statement:</strong></p>\r\n\r\nLeveraging the raw 2013 ISPE Patient Survey data, we attempted to identify any useful, underlying trends that could drive practical patient experience focused business initiatives.  \r\n<br><br>\r\nA number of statistically validated insights were identified, including personal and written communication analysis, and variations of preference across therapeutic area.  From these insights we were able to derive useful hypotheses for what patients and caregivers were thinking and identify specific, actionable business initiatives to improve patient experiences in Takeda clinical trials.  \r\n\r\n<p><strong>Learning Objectives:</strong></p>\r\n\r\nAttendees will learn approaches used to leverage ISPE data set to improve patient experience in clinical studies, and through the examples at Takeda, gain insights to improve relationships with both patients and investigators."
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Received",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Presentation_Title",
-              "Value": "Bedside Manners: Using ISPEs Patient Survey Data to Improve Patient Experiences"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Record",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Recording",
-              "Value": ""
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Registered",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed",
-              "Value": {
-                "$type": "System.Boolean",
-                "$value": false
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Removed_Date",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Role",
-              "Value": "SPKR"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "SEQN",
-              "Value": {
-                "$type": "System.Int32",
-                "$value": 666677
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "TIME_STAMP",
-              "Value": {
-                "$type": "System.Byte[], mscorlib",
-                "$value": "AAAAACnCqWo="
-              }
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "Track",
-              "Value": "END-TO-END SUPPLY CHAIN MANAGEMENT"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_1",
-              "Value": "Monday 11/9/2015"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UC_2",
-              "Value": "Monday 11/9/2015"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_1",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UD_2",
-              "Value": "0001-01-01T00:00:00"
-            },
-            {
-              "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-              "Name": "UN_1",
-              "Value": {
-                "$type": "System.Double",
-                "$value": 0
-              }
-            }
-          ]
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Abstract",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Agreement",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Assistant_Info",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Date_Modified",
+        "Value": "2015-07-28T13:28:08.737"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Event_Code",
+        "Value": "NA15CENOV"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "File_Location",
+        "Value": "http://www.ispe.org/multimedia/conference-handouts/na15cenov/Marschel_Gardner_NA15CENOV_Bedside-Manners-Using-ISPEs-Patient-Survey-Data-to-Improve-Patient-Experiences.pdf"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Code",
+        "Value": "SES5-501"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_End_Date",
+        "Value": "2015-11-09T10:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Function_Start_Date",
+        "Value": "2015-11-09T08:30:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "ID",
+        "Value": "1000163"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Invited",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Packet_Sent",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_NO_SHOW",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "PPT_Received",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": true
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Desc",
+        "Value": "<p><strong>Problem or Opportunity Statement:</strong></p>\r\n\r\nLeveraging the raw 2013 ISPE Patient Survey data, we attempted to identify any useful, underlying trends that could drive practical patient experience focused business initiatives.  \r\n<br><br>\r\nA number of statistically validated insights were identified, including personal and written communication analysis, and variations of preference across therapeutic area.  From these insights we were able to derive useful hypotheses for what patients and caregivers were thinking and identify specific, actionable business initiatives to improve patient experiences in Takeda clinical trials.  \r\n\r\n<p><strong>Learning Objectives:</strong></p>\r\n\r\nAttendees will learn approaches used to leverage ISPE data set to improve patient experience in clinical studies, and through the examples at Takeda, gain insights to improve relationships with both patients and investigators."
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Received",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Presentation_Title",
+        "Value": "Bedside Manners: Using ISPEs Patient Survey Data to Improve Patient Experiences"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Record",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Recording",
+        "Value": ""
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Registered",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Removed",
+        "Value": {
+          "$type": "System.Boolean",
+          "$value": false
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Removed_Date",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Role",
+        "Value": "SPKR"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "SEQN",
+        "Value": {
+          "$type": "System.Int32",
+          "$value": 666677
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "TIME_STAMP",
+        "Value": {
+          "$type": "System.Byte[], mscorlib",
+          "$value": "AAAAACnCqWo="
+        }
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "Track",
+        "Value": "END-TO-END SUPPLY CHAIN MANAGEMENT"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UC_1",
+        "Value": "Monday 11/9/2015"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UC_2",
+        "Value": "Monday 11/9/2015"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UD_1",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UD_2",
+        "Value": "0001-01-01T00:00:00"
+      },
+      {
+        "$type": "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        "Name": "UN_1",
+        "Value": {
+          "$type": "System.Double",
+          "$value": 0
         }
       }
     ]
-  },
-  "Offset": 0,
-  "Limit": 100,
-  "Count": 1,
-  "TotalCount": 1,
-  "NextPageLink": null,
-  "HasNext": false,
-  "NextOffset": 0
+  }
 }

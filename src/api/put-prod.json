@@ -1,0 +1,23 @@
+{
+  "$type": "Asi.Soa.Core.DataContracts.ValidateResultsData, Asi.Contracts",
+  "IsValid": false,
+  "ValidationResults": {
+    "$type": "Asi.Soa.Core.DataContracts.ValidationResultsData, Asi.Contracts",
+    "Errors": {
+      "$type": "Asi.Soa.Core.DataContracts.ValidationResultDataCollection, Asi.Contracts",
+      "$values": [
+        {
+          "$type": "Asi.Soa.Core.DataContracts.ValidationResultData, Asi.Contracts",
+          "Message": "  \r\nCsISPE_Event_Speakers constraint violations:\r\n  
+          PropertyName=Abstract; Message=Required Field - Abstract; Severity=Error\r\n 
+           PropertyName=Assistant_Info; Message=Required Field - Assistant_Info; Severity=Error\r\n 
+            PropertyName=Recording; Message=Required Field - Recording; Severity=Error\r\n"
+        }
+      ]
+    },
+    "Warnings": {
+      "$type": "Asi.Soa.Core.DataContracts.ValidationResultDataCollection, Asi.Contracts",
+      "$values": []
+    }
+  }
+}
