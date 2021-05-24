@@ -1,6 +1,7 @@
 const colors = require("windicss/colors");
 const typography = require("windicss/plugin/typography");
-module.exports = {
+export default {
+  attributify: true,
   darkMode: "class",
   plugins: [typography],
   theme: {

@@ -1,5 +1,4 @@
 <script>
-  // import { createForm } from "felte";
   import { onMount } from "svelte";
   import { formula } from "svelte-formula";
   import { get } from "svelte/store";
@@ -127,7 +126,7 @@
 
 {#if $remoteValue}
   {#if $remoteValue.error}
-    <div class="bg-red-600 text-white p-4 rounded m-6">
+    <div bg="red-600" text="white" class="p-4 rounded m-6">
       {$remoteValue.error}
     </div>
   {:else}
