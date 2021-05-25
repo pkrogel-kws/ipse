@@ -56,6 +56,11 @@ export const put = async ({ data, id, seqn }) => {
 
     response = await response.json();
 
+    if (!response.IsValid) {
+      console.error("PUT ERROR: ", response.ValidationResults);
+      throw "Error occured in PUT. Check console for details.";
+    }
+
     console.log("response from put api", response);
     return response;
   } catch (e) {

@@ -30,8 +30,9 @@ const createStore = async (id, seqn) => {
     // const payload = { ...item };
     // payload.Properties.$values = values;
     let payload = patchPayload(response, formData);
-    // payload = replaceEmptyValuesInPayload(payload);
-    // payload = removeFieldFromPayload("Date_Modified", payload);
+    payload = replaceEmptyValuesInPayload(payload);
+    payload = removeFieldFromPayload("Date_Modified", payload);
+    // payload = repairPropertyIndexesInPayload(payload);
     console.log("repaired payload ", payload);
 
     response = await api.put({ data: payload, seqn, id });
@@ -140,11 +141,11 @@ const removeFieldFromPayload = (fieldName, payload) => {
   payload.Properties.$values.forEach(({ Name, Value }, idx) => {
     if (Name === fieldName) {
       console.log(`removing `, { Name, Value, idx });
-
-      delete payload.Properties.$values[idx];
+      payload.Properties.$values.splice(idx, 1);
       return;
     }
   });
+  //need to fix up indexes
   return payload;
 };
 
