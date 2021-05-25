@@ -38,7 +38,15 @@
 
 <div class="relative h-10 input-component mb-5">
   <div
-    class="input h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm flex items-stretch"
+    h="full"
+    w="full"
+    border="gray-300"
+    px="2"
+    rounded="sm"
+    transition="all"
+    items="stretch"
+    display="flex"
+    class="input"
   >
     <!-- <Datepicker id={label} name="name" bind:selected /> -->
     <Flatpickr
@@ -65,7 +73,14 @@
       </div></Flatpickr
     >-->
   </div>
-  <label for="name" class="absolute left-2 transition-all bg-white px-1">
+  <label
+    for="name"
+    bg="white"
+    px="1"
+    left="2"
+    transition="all"
+    position="absolute"
+  >
     {label}
   </label>
 </div>

@@ -13,12 +13,24 @@
     id={name}
     {name}
     type="text"
-    class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm"
     rows="50"
     cols="50"
+    h="full"
+    w="full"
+    border="gray-300"
+    px="2"
+    rounded="sm"
+    transition="all"
     {value}
   />
-  <label for="name" class="absolute left-2 transition-all bg-white px-1">
+  <label
+    for="name"
+    bg="white"
+    px="1"
+    left="2"
+    transition="all"
+    position="absolute"
+  >
     {label}
   </label>
 </div>

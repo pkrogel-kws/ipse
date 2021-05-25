@@ -39,7 +39,10 @@
 </script>
 
 <div
-  class="flatpickr relative h-10 input-component mb-5"
+  h="10"
+  mb="5"
+  position="relative"
+  class="flatpickr  input-component"
   bind:this={flatpickrNode}
 >
   <!-- <Flatpickr {options} {value} bind:formattedValue {name} {disabled} /> -->
@@ -49,7 +52,12 @@
     id={name}
     type="text"
     {name}
-    class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm"
+    h="full"
+    w="full"
+    border="gray-300"
+    px="2"
+    transition="all"
+    rounded="sm"
     value={selectedDate}
     placeholder="Select Date.."
   />
@@ -62,7 +70,14 @@
     <a class="input-button" title="clear" data-clear>
         <i class="icon-close"></i>
     </a> -->
-  <label for="name" class="absolute left-2 transition-all bg-white px-1">
+  <label
+    for="name"
+    position="absolute"
+    left="2"
+    transition="all"
+    bg="white"
+    px="1"
+  >
     {label}
   </label>
 </div>

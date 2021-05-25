@@ -142,13 +142,19 @@
 <Modal store={modalStore}>
   <div
     slot="header"
-    class="bg-primary flex flex-row align-center px-8 py-4 text-white"
+    bg="primary"
+    display="flex"
+    flex="row"
+    align="center"
+    px="8"
+    py="4"
+    text="white"
   >
-    <h1 class="text-white text-lg">{modalTitle}</h1>
-    <div class="flex-grow" />
+    <h1 text="white lg">{modalTitle}</h1>
+    <div flex="grow" />
     <CloseIcon onClick={modalStore.close} />
   </div>
-  <div slot="content" class="mx-8 relative">
+  <div slot="content" mx="8" position="relative">
     <SpeakerForm {data} closeModal={modalStore.close} />
   </div>
   <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>

@@ -30,8 +30,8 @@ const createStore = async (id, seqn) => {
     // const payload = { ...item };
     // payload.Properties.$values = values;
     let payload = patchPayload(response, formData);
-    payload = replaceEmptyValuesInPayload(payload);
-    payload = removeFieldFromPayload("Date_Modified", payload);
+    // payload = replaceEmptyValuesInPayload(payload);
+    // payload = removeFieldFromPayload("Date_Modified", payload);
     console.log("repaired payload ", payload);
 
     response = await api.put({ data: payload, seqn, id });

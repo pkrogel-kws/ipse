@@ -6,17 +6,29 @@
   export let readOnly = false;
 </script>
 
-<div class="relative h-10 input-component mb-5">
+<div h="10" mb="5" class="relative input-component">
   <input
     {disabled}
     {readOnly}
     id={name}
     type="text"
     {name}
-    class="h-full w-full border-gray-300 px-2 transition-all border-blue rounded-sm"
     {value}
+    h="full"
+    w="full"
+    border="gray-300"
+    px="2"
+    rounded="sm"
+    transition="all"
   />
-  <label for="name" class="absolute left-2 transition-all bg-white px-1">
+  <label
+    for="name"
+    bg="white"
+    px="1"
+    left="2"
+    transition="all"
+    position="absolute"
+  >
     {label}
   </label>
 </div>

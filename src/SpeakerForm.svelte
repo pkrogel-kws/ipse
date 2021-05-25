@@ -126,28 +126,46 @@
 
 {#if $remoteValue}
   {#if $remoteValue.error}
-    <div bg="red-600" text="white" class="p-4 rounded m-6">
+    <div bg="red-600" text="white" p="4" m="6" class="rounded">
       {$remoteValue.error}
     </div>
   {:else}
     <form
       use:form
-      class="flex flex-col justify-center items-stretch min-w-3xl"
+      min-w="3xl"
+      display="flex"
+      flex="col"
+      justify="center"
+      items="stretch"
       on:submit={onSubmit}
     >
       {#if $remoteValue?.loading}
-        <div class="inset-0 opacity-50 absolute bg-white z-1">
+        <div bg="white" z="1" inset="0" opacity="50" position="absolute">
           <LoadingSpinner />
         </div>
       {/if}
       <div
-        class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
+        display="flex"
+        w="full"
+        justify="center"
+        bg="white"
+        rounded="lg"
+        mx="auto"
+        flex="col"
+        p="4"
       >
         <TextInput label="ID" name="ID" value={$data.ID} disabled />
       </div>
-      <div class="flex ">
+      <div display="flex">
         <div
-          class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
+          display="flex"
+          w="full"
+          justify="center"
+          bg="white"
+          rounded="lg"
+          mx="auto"
+          flex="col"
+          p="4"
         >
           <TextInput
             label="Event Code"
@@ -171,7 +189,14 @@
           />
         </div>
         <div
-          class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
+          bg="white"
+          p="4"
+          display="flex"
+          flex="col"
+          w="full"
+          justify="center"
+          rounded="lg"
+          mx="auto"
         >
           <TextInput
             label="Function Code"
@@ -191,7 +216,14 @@
         </div>
       </div>
       <div
-        class="flex  w-full justify-center bg-white rounded-lg mx-auto flex flex-col p-4"
+        bg="white"
+        p="4"
+        display="flex"
+        flex="col"
+        mx="auto"
+        rounded="lg"
+        justify="center"
+        w="full"
       >
         <TextInput
           label="Title"
@@ -208,7 +240,20 @@
       <div class="mx-8 flex">
         {#if $data.ID}
           <button
-            class="bg-red-500 text-white active:bg-red-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:bg-red-600 outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
+            bg="red-500 active:red-600 hover:red-600"
+            font="bold"
+            text="sm white uppercase"
+            px="6"
+            py="3"
+            rounded="lg"
+            outline="none"
+            mr="1"
+            mb="1"
+            duration="150"
+            transition="all"
+            opacity="disabled:50"
+            uppercase
+            class="shadow"
             on:click={handleDelete}
           >
             <i class="fas fa-heart" /> Delete
@@ -217,14 +262,41 @@
         <div class="flex-grow" />
 
         <button
-          class="text-primary bg-transparent border border-solid border-primary hover:bg-primary hover:text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
+          text="sm primary uppercase hover:white "
+          font="bold"
+          bg="transparent hover:primary active:primary-600"
+          border="solid primary"
+          px="6"
+          py="3"
+          outline="none"
+          mr="1"
+          mb="1"
+          transition="all"
+          duration="150"
+          opacity="disabled:50"
+          ease="linear"
+          class="border "
+          rounded="lg"
           type="button"
           on:click={handleReset}
         >
           Reset
         </button>
         <button
-          class="bg-primary text-white active:bg-primary-600 font-bold uppercase text-sm px-6 py-3 rounded-lg shadow hover:bg-primary-600 outline-none mr-1 mb-1 ease-linear transition-all duration-150 disabled:opacity-50"
+          bg="primary hover:primary-600 active:primary-600"
+          text="white sm uppercase"
+          font="bold"
+          px="6"
+          py="3"
+          rounded="lg"
+          outline="none"
+          mr="1"
+          mb="1"
+          ease="linear"
+          tranistion="all"
+          duration="150"
+          opacity="disabled:50"
+          class="shadow "
           type="submit"
           disabled={!canSave}
         >
