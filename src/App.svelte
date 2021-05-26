@@ -159,6 +159,17 @@
       }
     });
   };
+
+  //remove row
+  const handleEntityDeleted = () => {
+    toast.push("Event successfully deleted!", {
+      theme: {
+        "--toastBackground": "#48BB78",
+        "--toastProgressBackground": "#2F855A",
+      },
+    });
+    row.parentNode.removeChild(row);
+  };
 </script>
 
 <Modal store={modalStore}>
@@ -181,6 +192,7 @@
       {data}
       closeModal={modalStore.close}
       on:entity-updated={handleEntityUpdated}
+      on:entity-deleted={handleEntityDeleted}
     />
   </div>
   <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>

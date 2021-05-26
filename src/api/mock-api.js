@@ -57,6 +57,7 @@ export const del = async ({ id, seqn }) => {
     }).then(response=>response.json()).then(console.log);`;
   console.log(fetchCall);
   await timeout(3000);
+  return true;
 };
 
 const timeout = (ms) => {

@@ -126,8 +126,8 @@
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log("Delete!");
     await remoteValue.del();
+    dispatch("entity-deleted");
     closeModal();
   };
 
