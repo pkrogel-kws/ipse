@@ -1,5 +1,12 @@
-<div class="container">
-  <div class="loader-container">
+<div
+  class="container"
+  display="flex"
+  items="center"
+  justify="center"
+  h="full"
+  flex="row wrap"
+>
+  <div class="loader-container" w="1/2" h="1/2" position="relative">
     <div />
     <div />
     <div />
@@ -24,23 +31,11 @@
 </svg>
 
 <style>
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  svg {
+  /* svg {
     display: none;
-  }
+  } */
 
   .loader-container {
-    width: 50%;
-    height: 50%;
-    position: relative;
     filter: url(#gooey);
   }
 

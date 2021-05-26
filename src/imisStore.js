@@ -108,11 +108,11 @@ const patchPayload = (payload, values) => {
 };
 
 const propertiesToCheck = [
-  "Abstract",
-  "Assistant_Info",
-  "File_Location",
-  "Function_Code",
-  "Recording",
+  // "Abstract",
+  // "Assistant_Info",
+  // "File_Location",
+  // "Function_Code",
+  // "Recording",
   "UC_1",
   "UC_2",
 ];

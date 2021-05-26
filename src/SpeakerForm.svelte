@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { createEventDispatcher, onMount } from "svelte";
   import { formula } from "svelte-formula";
   import { get } from "svelte/store";
   import TextInput from "./TextInput.svelte";
@@ -19,6 +19,8 @@
   const DATE_FIELDS = ["Function_Start_Date", "Function_End_Date"];
   const BOOLEAN_FIELDS = ["SHOW_PPT"];
 
+  const dispatch = createEventDispatcher();
+
   const {
     form,
     dirty,
@@ -27,6 +29,7 @@
     resetForm,
     submitValues,
     touched,
+    updateForm,
     ...rest
   } = formula();
 
@@ -39,7 +42,19 @@
       transformStringFields(values);
       console.log("Form.onSubmit", values);
 
-      remoteValue.put(values); //API call
+      const fieldsToUpdate = Object.entries($dirty)
+        .filter(([field, isDirty]) => !!isDirty)
+        .map(([key, val]) => key);
+      await remoteValue.put(values); //API call
+      const newValues = get(remoteValue).data;
+
+      // const derivedDirtyVals = fieldsToUpdate.map((key) => newValues[key]);
+      const derivedDirtyVals = fieldsToUpdate.map((key) => [
+        key,
+        newValues[key],
+      ]);
+      updateForm();
+      dispatch("entity-updated", derivedDirtyVals);
     } catch (e) {
       //TODO: handle
     }
@@ -144,18 +159,7 @@
           <LoadingSpinner />
         </div>
       {/if}
-      <div
-        display="flex"
-        w="full"
-        justify="center"
-        bg="white"
-        rounded="lg"
-        mx="auto"
-        flex="col"
-        p="4"
-      >
-        <TextInput label="ID" name="ID" value={$data.ID} disabled />
-      </div>
+
       <div display="flex">
         <div
           display="flex"
@@ -167,21 +171,24 @@
           flex="col"
           p="4"
         >
+          <TextInput label="ID" name="ID" value={$data.ID} disabled />
+
           <TextInput
             label="Event Code"
             name="Event_Code"
             value={$remoteValue.data.Event_Code}
             disabled
           />
-
-          <DateInput
-            label="Start"
-            name="Function_Start_Date"
-            value={$remoteValue.data.Function_Start_Date}
-            bind:reset={resetStart}
-            update={formValues.update}
+          <TextInput
+            label="Function Code"
+            value={$remoteValue.data.Function_Code}
+            disabled
           />
-
+          <TextInput
+            label="Track"
+            name="Track"
+            value={$remoteValue.data.Track}
+          />
           <Switch
             label="Hide PPT"
             name="PPT_NO_SHOW"
@@ -198,12 +205,13 @@
           rounded="lg"
           mx="auto"
         >
-          <TextInput
-            label="Function Code"
-            value={$remoteValue.data.Function_Code}
-            disabled
+          <DateInput
+            label="Start"
+            name="Function_Start_Date"
+            value={$remoteValue.data.Function_Start_Date}
+            bind:reset={resetStart}
+            update={formValues.update}
           />
-
           <DateInput
             label="End"
             name="Function_End_Date"
@@ -213,6 +221,18 @@
           />
 
           <TextInput label="Role" name="Role" value={$remoteValue.data.Role} />
+          <TextInput
+            label="Assistant"
+            name="Assistant_Info"
+            value={$remoteValue.data.Assistant_Info}
+            required
+          />
+          <TextInput
+            label="Recording"
+            name="Recording"
+            value={$remoteValue.data.Recording}
+            required
+          />
         </div>
       </div>
       <div
@@ -230,10 +250,20 @@
           name="Presentation_Title"
           value={$remoteValue.data.Presentation_Title}
         />
-        <TextInput label="Track" name="Track" value={$remoteValue.data.Track} />
+        <TextInput
+          label="Abstract"
+          name="Abstract"
+          value={$remoteValue.data.Abstract}
+          required
+        />
+        <TextInput
+          label="File Location"
+          name="File_Location"
+          value={$remoteValue.data.File_Location}
+        />
         <TextArea
           label="Description"
-          name="Presentation_Description"
+          name="Presentation_Desc"
           value={$remoteValue.data.Presentation_Desc}
         />
       </div>

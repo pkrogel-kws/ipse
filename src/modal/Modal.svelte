@@ -101,6 +101,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
+    backdrop-filter: blur(4);
   }
   div.content-wrapper {
     z-index: 10;

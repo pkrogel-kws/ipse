@@ -4,10 +4,12 @@
   export let name;
   export let disabled = false;
   export let readOnly = false;
+  export let required = false;
 </script>
 
 <div h="10" mb="5" class="relative input-component">
   <input
+    {required}
     {disabled}
     {readOnly}
     id={name}

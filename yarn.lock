@@ -63,6 +63,11 @@
     micromatch "^4.0.4"
     windicss "^3.0.9"
 
+"@zerodevx/svelte-toast@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@zerodevx/svelte-toast/-/svelte-toast-0.3.0.tgz#39a15b409ddb6790c66a0665cbd589c0d8dd9234"
+  integrity sha512-TY5dLB5DEpxuHu60M6gum+fDxzIGXg35R8500orz58JTFs9LiHWoEfeJ4n9t7Afix3iMmYLl2thjhnCHCiQIhQ==
+
 ansi-styles@^4.1.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-4.3.0.tgz#edd803628ae71c04c85ae7a0906edad34b648937"
@@ -779,10 +784,10 @@ vite-plugin-windicss@^0.16.0:
     debug "^4.3.2"
     windicss "^3.0.9"
 
-vite@^2.3.3:
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-2.3.3.tgz#7e88a71abd03985c647789938d784cce0ee3b0fd"
-  integrity sha512-eO1iwRbn3/BfkNVMNJDeANAFCZ5NobYOFPu7IqfY7DcI7I9nFGjJIZid0EViTmLDGwwSUPmRAq3cRBbO3+DsMA==
+vite@^2.3.4:
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-2.3.4.tgz#370118e0334725b898ff754ea43d5db4c5e120e3"
+  integrity sha512-7orxrF65+Q5n/sMCnO91S8OS0gkPJ7g+y3bLlc7CPCXVswK8to1T8YycCk9SZh+AcIc0TuN6YajWTBFS5atMNA==
   dependencies:
     esbuild "^0.11.23"
     postcss "^8.2.10"

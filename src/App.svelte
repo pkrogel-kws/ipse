@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { writable } from "svelte/store";
+  import { SvelteToast, toast } from "@zerodevx/svelte-toast";
+
   import Modal, { store } from "./modal";
   import CloseIcon from "./CloseButton.svelte";
   import SpeakerForm from "./SpeakerForm.svelte";
@@ -14,6 +16,7 @@
   let headers = [];
   const modalStore = store(false);
   const data = writable();
+  let row;
   $: console.log($data, "parsed data from row");
 
   let rowClickListeners = [];
@@ -28,17 +31,18 @@
   const addClickHandlersToRows = () => {
     const rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
 
-    rows.forEach((row) => {
+    rows.forEach((rowElem) => {
       const handleClickRow = () => {
+        row = rowElem;
         $data = getDataFromRow(row);
         $data.Function_Start_Date = new Date($data.Function_Start_Date);
         $data.Function_End_Date = new Date($data.Function_End_Date);
 
         modalStore.open();
       };
-      row.addEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
+      rowElem.addEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
       rowClickListeners.push(() => {
-        row.removeEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
+        rowElem.removeEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
       });
     });
   };
@@ -137,6 +141,24 @@
       modalTitle = "New Speaker";
     }
   }
+
+  //map updated POST values to existing DOM so we don't have to refetch
+  const handleEntityUpdated = ({ detail }) => {
+    toast.push("Event successfully updated!", {
+      theme: {
+        "--toastBackground": "#48BB78",
+        "--toastProgressBackground": "#2F855A",
+      },
+    });
+    detail.forEach(([key, val]) => {
+      console.log("*", { key, val, headers, headerIdx: headers.indexOf(key) });
+      const cellIndex = headers.indexOf(key);
+      if (cellIndex >= 0) {
+        const cell = row.children[cellIndex];
+        cell.innerText = val;
+      }
+    });
+  };
 </script>
 
 <Modal store={modalStore}>
@@ -155,7 +177,11 @@
     <CloseIcon onClick={modalStore.close} />
   </div>
   <div slot="content" mx="8" position="relative">
-    <SpeakerForm {data} closeModal={modalStore.close} />
+    <SpeakerForm
+      {data}
+      closeModal={modalStore.close}
+      on:entity-updated={handleEntityUpdated}
+    />
   </div>
   <!-- <div slot="footer" class="mx-8 flex" let:store={{ close }}>
     <button
@@ -181,3 +207,4 @@
     </button>
   </div> -->
 </Modal>
+<SvelteToast options={{ reversed: true, intro: { y: 192 } }} />
