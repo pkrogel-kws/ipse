@@ -260,6 +260,7 @@
           label="File Location"
           name="File_Location"
           value={$remoteValue.data.File_Location}
+          required
         />
         <TextArea
           label="Description"
