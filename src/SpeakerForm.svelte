@@ -36,7 +36,7 @@
   const onSubmit = async (e) => {
     e.preventDefault();
     const values = transformStringFields(get(formValues));
-    const isNew = !values.ID;
+    const isNew = !values.SEQN;
     console.log("isNew", isNew);
     try {
       //todo: probably handle this at the form field level rather than form onsubmit level
@@ -90,9 +90,11 @@
       }
       if (DATE_FIELDS.includes(key)) {
         // console.log({ key, val }, "date~~~");
-        let date = new Date(val).toISOString();
-        values[key] = date.substring(0, date.length - 1); //remove z at end
-        return;
+        if (val) {
+          let date = new Date(val).toISOString();
+          values[key] = date.substring(0, date.length - 1); //remove z at end
+          return;
+        }
       }
     });
     return values;
@@ -229,6 +231,7 @@
             value={$remoteValue.data.Function_Start_Date}
             bind:reset={resetStart}
             update={formValues.update}
+            required
           />
           <DateInput
             label="End"
@@ -236,9 +239,15 @@
             value={$remoteValue.data.Function_End_Date}
             bind:reset={resetEnd}
             update={formValues.update}
+            required
           />
 
-          <TextInput label="Role" name="Role" value={$remoteValue.data.Role} />
+          <TextInput
+            label="Role"
+            name="Role"
+            value={$remoteValue.data.Role}
+            required
+          />
           <TextInput
             label="Assistant"
             name="Assistant_Info"
@@ -288,7 +297,7 @@
         />
       </div>
       <div class="mx-8 flex">
-        {#if $data.ID}
+        {#if $data.SEQN}
           <button
             bg="red-500 active:red-600 hover:red-600"
             font="bold"

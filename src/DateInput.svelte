@@ -9,6 +9,7 @@
   export let name;
   export let disabled;
   export let update;
+  export let required;
 
   let node;
   export let options = {
@@ -57,7 +58,14 @@
       {disabled}
       bind:flatpickr
     />
-    <input type="text" {name} bind:value readonly style="display:none;" />
+    <input
+      type="text"
+      {name}
+      bind:value
+      readonly
+      style="display:none;"
+      {required}
+    />
     <!-- <Flatpickr {options} bind:value bind:formattedValue {name}>
       <div class="flatpickr" id="my-picker">
         <input

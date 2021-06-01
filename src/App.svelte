@@ -125,8 +125,8 @@
     //tODO:get empty data object like we do in imis store
     modalStore.close();
     setTimeout(() => {
-      $data = {};
-    }, 1000);
+      $data = { ID };
+    }, 500);
   };
 
   onMount(() => {

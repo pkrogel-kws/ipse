@@ -173,14 +173,14 @@ export default {
         Name: "SEQN",
         Value: { $type: "System.Int32", $value: null },
       },
-      //   {
-      //     $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-      //     Name: "TIME_STAMP",
-      //     Value: {
-      //       $type: "System.Byte[], mscorlib",
-      //       $value: "AAAAACnCqlY=",
-      //     },
-      //   },
+      {
+        $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
+        Name: "TIME_STAMP",
+        Value: {
+          $type: "System.Byte[], mscorlib",
+          $value: "AAAAACnCqlY=",
+        },
+      },
       {
         $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
         Name: "Track",

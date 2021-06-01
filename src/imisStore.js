@@ -56,7 +56,7 @@ const createStore = async (id, seqn) => {
     let payload = patchPayload(response, formData);
     payload = replaceEmptyValuesInPayload(payload);
     // payload = removeFieldFromPayload("Date_Modified", payload);
-    payload = removeFieldFromPayload("TIME_STAMP", payload);
+    // payload = removeFieldFromPayload("TIME_STAMP", payload);
 
     delete payload.PrimaryParentIdentity.IdentityElements;
     delete payload.Identity.IdentityElements;
@@ -64,7 +64,7 @@ const createStore = async (id, seqn) => {
     console.log("repaired payload (final) ", payload);
 
     response = await api.post({ data: payload });
-    console.log("server responded with", response);
+    console.log("server responded with: ", response);
     //TODO:handle errors here
     set({
       loading: false,
