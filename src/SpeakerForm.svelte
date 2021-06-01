@@ -13,6 +13,7 @@
 
   export let data;
   export let closeModal;
+  export let type;
 
   let remoteValue;
 
@@ -36,8 +37,6 @@
   const onSubmit = async (e) => {
     e.preventDefault();
     const values = transformStringFields(get(formValues));
-    const isNew = !values.SEQN;
-    console.log("isNew", isNew);
     try {
       //todo: probably handle this at the form field level rather than form onsubmit level
       transformStringFields(values);
@@ -47,7 +46,7 @@
         .filter(([field, isDirty]) => !!isDirty)
         .map(([key, val]) => key);
 
-      if (isNew) {
+      if (type === "create") {
         fieldsToUpdate = [...fieldsToUpdate, "SEQN", "ID"];
         await remoteValue.post(values); //API call
       } else {
@@ -68,7 +67,7 @@
       // console.log("set data to", $data);
       updateForm({ defaultValues: newValues });
       dispatch("entity-updated", {
-        type: isNew ? "created" : "updated",
+        type: type === "create" ? "created" : "updated",
         data: derivedDirtyVals,
       });
     } catch (e) {
@@ -132,7 +131,8 @@
     !!Object.values($dirty).filter((t) => !!t).length || $remoteValue?.loading;
   //TODO:set canSave = false
 
-  $: console.log($formValues, "formDataChanged");
+  // $: console.log($formValues, "formDataChanged");
+  $: console.log(type, "form type changed");
 
   let resetEnd, resetStart;
 
@@ -297,7 +297,7 @@
         />
       </div>
       <div class="mx-8 flex">
-        {#if $data.SEQN}
+        {#if type === "update"}
           <button
             bg="red-500 active:red-600 hover:red-600"
             font="bold"

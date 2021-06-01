@@ -22,7 +22,7 @@ export const get = async (id, seqn) => {
 };
 
 export const put = async ({ data, id, seqn }) => {
-  console.log("mock data put", data);
+  console.log("mock data PUT", data);
   // console.log("mock data put JSON", JSON.stringify(data));
 
   const url = `${API_URL}/~${id}|${seqn}`;
@@ -45,7 +45,7 @@ export const put = async ({ data, id, seqn }) => {
 };
 
 export const post = async ({ data }) => {
-  console.log("mock data put", data);
+  console.log("mock data POST", data);
   // console.log("mock data put JSON", JSON.stringify(data));
 
   // const payload = generatePutPayloadFromFormData(data);

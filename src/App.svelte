@@ -19,6 +19,7 @@
   let row;
   let rows;
   let ID;
+  let formType;
   $: console.log($data, "parsed data from row");
 
   let rowClickListeners = [];
@@ -35,6 +36,8 @@
 
     rows.forEach((rowElem) => {
       const handleClickRow = () => {
+        formType = "update";
+
         row = rowElem;
         $data = getDataFromRow(row);
         $data.Function_Start_Date = new Date($data.Function_Start_Date);
@@ -118,6 +121,7 @@
   const handleClickAddBtn = () => {
     //tODO:get empty data object like we do in imis store
     $data = { ID };
+    formType = "create";
     modalStore.open();
   };
 
@@ -141,14 +145,6 @@
       removeMutationObserver();
     };
   });
-  let modalTitle;
-  $: {
-    if ($data && $data.ID) {
-      modalTitle = "Update Speaker";
-    } else {
-      modalTitle = "New Speaker";
-    }
-  }
 
   //map updated POST values to existing DOM so we don't have to refetch
   const handleEntityUpdated = ({ detail }) => {
@@ -192,12 +188,15 @@
     py="4"
     text="white"
   >
-    <h1 text="white lg">{modalTitle}</h1>
+    <h1 text="white lg">
+      {formType === "create" ? "Add Speaker" : "Update Speaker"}
+    </h1>
     <div flex="grow" />
     <CloseIcon onClick={handleCloseModal} />
   </div>
   <div slot="content" mx="8" position="relative">
     <SpeakerForm
+      type={formType}
       {data}
       closeModal={handleCloseModal}
       on:entity-updated={handleEntityUpdated}
