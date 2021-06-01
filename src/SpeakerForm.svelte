@@ -53,7 +53,7 @@
       } else {
         await remoteValue.put(values); //API call
       }
-      console.log("need to update:", fieldsToUpdate);
+      console.log("need to update: ", fieldsToUpdate);
 
       const newValues = get(remoteValue).data;
       console.log("newValues from server:", newValues);

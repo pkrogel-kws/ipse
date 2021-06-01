@@ -1,7 +1,7 @@
 {
   "name": "ipse-imis-modal",
   "version": "0.0.1",
-  "homepage": "http://pkrogel-kws.github.io/ipse",
+  "homepage": "https://pkrogel-kws.github.io/ipse",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

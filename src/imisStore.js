@@ -61,7 +61,7 @@ const createStore = async (id, seqn) => {
     delete payload.PrimaryParentIdentity.IdentityElements;
     delete payload.Identity.IdentityElements;
 
-    console.log("repaired payload (final) ", payload);
+    console.log("repaired payload (final:) ", payload);
 
     response = await api.post({ data: payload });
     console.log("server responded with: ", response);
