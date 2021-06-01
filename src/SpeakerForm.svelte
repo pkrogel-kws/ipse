@@ -36,25 +36,41 @@
   const onSubmit = async (e) => {
     e.preventDefault();
     const values = transformStringFields(get(formValues));
-
+    const isNew = !values.ID;
+    console.log("isNew", isNew);
     try {
       //todo: probably handle this at the form field level rather than form onsubmit level
       transformStringFields(values);
       console.log("Form.onSubmit", values);
 
-      const fieldsToUpdate = Object.entries($dirty)
+      let fieldsToUpdate = Object.entries($dirty)
         .filter(([field, isDirty]) => !!isDirty)
         .map(([key, val]) => key);
-      await remoteValue.put(values); //API call
-      const newValues = get(remoteValue).data;
 
+      if (isNew) {
+        fieldsToUpdate = [...fieldsToUpdate, "SEQN", "ID"];
+        await remoteValue.post(values); //API call
+      } else {
+        await remoteValue.put(values); //API call
+      }
+      console.log("need to update:", fieldsToUpdate);
+
+      const newValues = get(remoteValue).data;
+      console.log("newValues from server:", newValues);
       // const derivedDirtyVals = fieldsToUpdate.map((key) => newValues[key]);
       const derivedDirtyVals = fieldsToUpdate.map((key) => [
         key,
         newValues[key],
       ]);
-      updateForm();
-      dispatch("entity-updated", derivedDirtyVals);
+      console.log("need to update form:", derivedDirtyVals);
+      //WE NEED TO UPDATE FORM WITH NEW VALUES HERE
+      // $data = { ...$data, ...newValues };
+      // console.log("set data to", $data);
+      updateForm({ defaultValues: newValues });
+      dispatch("entity-updated", {
+        type: isNew ? "created" : "updated",
+        data: derivedDirtyVals,
+      });
     } catch (e) {
       //TODO: handle
     }
@@ -73,8 +89,9 @@
         }
       }
       if (DATE_FIELDS.includes(key)) {
-        console.log({ key, val }, "date~~~");
-        values[key] = new Date(val).toISOString();
+        // console.log({ key, val }, "date~~~");
+        let date = new Date(val).toISOString();
+        values[key] = date.substring(0, date.length - 1); //remove z at end
         return;
       }
     });
@@ -177,12 +194,13 @@
             label="Event Code"
             name="Event_Code"
             value={$remoteValue.data.Event_Code}
-            disabled
+            required
           />
           <TextInput
             label="Function Code"
+            name="Function_Code"
             value={$remoteValue.data.Function_Code}
-            disabled
+            required
           />
           <TextInput
             label="Track"
@@ -249,6 +267,7 @@
           label="Title"
           name="Presentation_Title"
           value={$remoteValue.data.Presentation_Title}
+          required
         />
         <TextInput
           label="Abstract"

@@ -23,7 +23,7 @@
     "svelte-hmr": "^0.14.4",
     "svelte-simple-modal": "^0.10.0",
     "vite": "^2.3.4",
-    "vite-plugin-windicss": "^0.16.0",
+    "vite-plugin-windicss": "^0.16.7",
     "yasp-modals": "^1.0.3"
   }
 }

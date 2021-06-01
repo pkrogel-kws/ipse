@@ -25,20 +25,63 @@ export const put = async ({ data, id, seqn }) => {
   console.log("mock data put", data);
   // console.log("mock data put JSON", JSON.stringify(data));
 
-  console.log(`${API_URL}/~${id}|${seqn}`, "*");
+  const url = `${API_URL}/~${id}|${seqn}`;
 
   // const payload = generatePutPayloadFromFormData(data);
 
-  const fetchCall = `    fetch('${API_URL}/~${id}|${seqn}', {
+  const fetchCall = `fetch('${url}', {
       method: "PUT",
-      data: '${JSON.stringify(data)}',
+      body: '${JSON.stringify(data)}',
       headers: {
         "RequestVerificationToken": document.getElementById("__RequestVerificationToken")?.value,
         "Content-Type": "application/json"
       },
     }).then(response=>response.json()).then(console.log);`;
   console.log(fetchCall);
+
   await timeout(3000);
+
+  return data;
+};
+
+export const post = async ({ data }) => {
+  console.log("mock data put", data);
+  // console.log("mock data put JSON", JSON.stringify(data));
+
+  // const payload = generatePutPayloadFromFormData(data);
+
+  const fetchCall = `fetch('${API_URL}', {
+      method: "POST",
+      body: '${JSON.stringify(data)}',
+      headers: {
+        "RequestVerificationToken": document.getElementById("__RequestVerificationToken")?.value,
+        "Content-Type": "application/json"
+      },
+    }).then(response=>response.json()).then(console.log);`;
+  console.log(fetchCall);
+
+  await timeout(3000);
+
+  const fakeId = uuid(8);
+  const fakeSqn = uuid(5);
+  data.Identity.IdentityElements = {
+    $type:
+      "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+    $values: [fakeId, fakeSqn],
+  };
+  data.PrimaryParentIdentity.IdentityElements = {
+    $type:
+      "System.Collections.ObjectModel.Collection`1[[System.String, mscorlib]], mscorlib",
+    $values: [fakeId],
+  };
+  data.Properties.$values.forEach((prop, idx) => {
+    if (prop.Name === "ID") {
+      data.Properties.$values[idx].Value = fakeId;
+    }
+    if (prop.Name === "SEQN") {
+      data.Properties.$values[idx].Value = fakeSqn;
+    }
+  });
   return data;
 };
 
@@ -64,4 +107,17 @@ const timeout = (ms) => {
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 
-export default { get, put, del };
+const uuid = (length) => {
+  var result = [];
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result.push(
+      characters.charAt(Math.floor(Math.random() * charactersLength))
+    );
+  }
+  return result.join("");
+};
+
+export default { get, post, put, del };

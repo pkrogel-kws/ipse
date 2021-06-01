@@ -1,11 +1,19 @@
 import { writable, readable } from "svelte/store";
 import { getApi } from "./api";
+import emptyContractObject from "./api/empty_object";
 
 const api = getApi();
 
 const createStore = async (id, seqn) => {
+  let response;
+  if (seqn) {
+    response = await api.get(id, seqn);
+  } else {
+    response = { ...emptyContractObject };
+  }
+
   console.log("creating imis store for ", { id, seqn });
-  let response = await api.get(id, seqn);
+  // let response = await api.get(id, seqn);
 
   const { subscribe, set, update } = writable({
     loading: false,
@@ -20,22 +28,43 @@ const createStore = async (id, seqn) => {
       data.loading = true;
       return data;
     });
+    let payload = patchPayload(response, formData);
 
-    // const values = Object.entries(formData).map(([Name, Value]) => ({
-    //   $type: "Asi.Soa.Core.DataContracts.GenericPropertyData, Asi.Contracts",
-    //   Name,
-    //   Value,
-    // }));
+    payload = replaceEmptyValuesInPayload(payload);
+    // payload = removeFieldFromPayload("Date_Modified", payload);
+    payload = removeFieldFromPayload("TIME_STAMP", payload);
 
-    // const payload = { ...item };
-    // payload.Properties.$values = values;
+    console.log("repaired payload (final) ", payload);
+
+    response = await api.put({ data: payload, seqn, id });
+    console.log("server responded with", response);
+    //TODO:handle errors here
+    set({
+      loading: false,
+      response,
+      data: response.error ? {} : extractValuesFromResponse(response),
+      error: response.error || false,
+    });
+  };
+
+  const post = async (formData) => {
+    update((data) => {
+      delete data?.error;
+      data.loading = true;
+      return data;
+    });
     let payload = patchPayload(response, formData);
     payload = replaceEmptyValuesInPayload(payload);
     // payload = removeFieldFromPayload("Date_Modified", payload);
     payload = removeFieldFromPayload("TIME_STAMP", payload);
-    console.log("repaired payload ", payload);
 
-    response = await api.put({ data: payload, seqn, id });
+    delete payload.PrimaryParentIdentity.IdentityElements;
+    delete payload.Identity.IdentityElements;
+
+    console.log("repaired payload (final) ", payload);
+
+    response = await api.post({ data: payload });
+    console.log("server responded with", response);
     //TODO:handle errors here
     set({
       loading: false,
@@ -75,13 +104,15 @@ const createStore = async (id, seqn) => {
       Track: null,
     });
   };
-  return { subscribe, del, put, clear };
+  return { subscribe, del, post, put, clear };
 };
 
 const extractValuesFromResponse = (response) => {
+  console.log(response, "response");
   const retVal = {};
   response.Properties.$values.forEach(({ Name, Value }) => {
-    if (typeof Value === "object") {
+    if (typeof Value === "object" && Value != null) {
+      // console.log(Name, "retVal[Name]");
       retVal[Name] = Value.$value;
     } else {
       //string
@@ -94,14 +125,16 @@ const extractValuesFromResponse = (response) => {
 const patchPayload = (payload, values) => {
   payload.Properties.$values.forEach(({ Name, Value }, idx) => {
     const newVal = values[Name];
+
     if (!newVal) {
       return;
     }
-    console.log(`patching `, { Name, Value, idx, newVal });
-    if (Value.$value !== undefined) {
+    // console.log(`patching `, { Name, Value, idx, newVal });
+    if (Value?.$value !== undefined) {
       payload.Properties.$values[idx] = { ...Value, $value: newVal };
       return;
     }
+
     payload.Properties.$values[idx].Value = newVal;
   });
   return payload;
@@ -126,7 +159,7 @@ const replaceEmptyValuesInPayload = (payload) => {
       //   //we need to pick replacement value based on field type
       //   return;
       // }
-      if (Value === "") {
+      if (Value === "" || Value === null) {
         console.log(`repairing `, { Name, Value, idx });
 
         payload.Properties.$values[idx].Value = "TEST";

@@ -17,6 +17,8 @@
   const modalStore = store(false);
   const data = writable();
   let row;
+  let rows;
+  let ID;
   $: console.log($data, "parsed data from row");
 
   let rowClickListeners = [];
@@ -29,7 +31,7 @@
   };
 
   const addClickHandlersToRows = () => {
-    const rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
+    rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
 
     rows.forEach((rowElem) => {
       const handleClickRow = () => {
@@ -57,6 +59,7 @@
       setupAddButton();
       removeRowClickEventListeners();
       addClickHandlersToRows();
+      getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
     };
 
     // Create an observer instance linked to the callback function
@@ -95,6 +98,12 @@
     console.log("headers set to", headers);
   };
 
+  const getID = () => {
+    if (rows && rows.length) {
+      ID = rows[0].children[headers.indexOf("ID")].innerText;
+    }
+  };
+
   const setupAddButton = () => {
     if (document.getElementById("addSpeakerBtn")) {
       return;
@@ -107,26 +116,25 @@
   };
 
   const handleClickAddBtn = () => {
-    $data = {
-      ID: "",
-      SEQN: "",
-      Event_Code: "",
-      Function_Code: "",
-      Function_Start_Date: null,
-      Function_End_Date: null,
-      PPT_NO_SHOW: null,
-      Role: null,
-      Presentation_Title: null,
-      Presentation_Desc: null,
-      Track: null,
-    };
+    //tODO:get empty data object like we do in imis store
+    $data = { ID };
     modalStore.open();
+  };
+
+  const handleCloseModal = () => {
+    //tODO:get empty data object like we do in imis store
+    modalStore.close();
+    setTimeout(() => {
+      $data = {};
+    }, 1000);
   };
 
   onMount(() => {
     getHeaders();
     addClickHandlersToRows();
     setupAddButton();
+    getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
+
     const removeMutationObserver = setupMutationObserver();
     return () => {
       removeRowClickEventListeners();
@@ -144,7 +152,8 @@
 
   //map updated POST values to existing DOM so we don't have to refetch
   const handleEntityUpdated = ({ detail }) => {
-    toast.push("Event successfully updated!", {
+    const { type, data } = detail;
+    toast.push(`Event successfully ${type}!`, {
       theme: {
         "--toastBackground": "#48BB78",
         "--toastProgressBackground": "#2F855A",
@@ -185,12 +194,12 @@
   >
     <h1 text="white lg">{modalTitle}</h1>
     <div flex="grow" />
-    <CloseIcon onClick={modalStore.close} />
+    <CloseIcon onClick={handleCloseModal} />
   </div>
   <div slot="content" mx="8" position="relative">
     <SpeakerForm
       {data}
-      closeModal={modalStore.close}
+      closeModal={handleCloseModal}
       on:entity-updated={handleEntityUpdated}
       on:entity-deleted={handleEntityDeleted}
     />
