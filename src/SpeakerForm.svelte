@@ -10,6 +10,7 @@
   import createImisStore from "./imisStore";
   import LoadingSpinner from "./LoadingSpinner.svelte";
   import Switch from "./Switch.svelte";
+  import Select from "./Select.svelte";
 
   export let data;
   export let closeModal;
@@ -91,7 +92,8 @@
         // console.log({ key, val }, "date~~~");
         if (val) {
           let date = new Date(val).toISOString();
-          values[key] = date.substring(0, date.length - 1); //remove z at end
+          // values[key] = date.substring(0, date.length - 1); //remove z at end
+          values[key] = date.substring(0, date.length - 2); //remove z and extra  0at end
           return;
         }
       }
@@ -156,6 +158,16 @@
   $: console.log("remoteValue", $remoteValue);
 
   let checked = false;
+
+  const role_select = [
+    { description: "Co-Leader", code: "COLDR" },
+    { description: "Co-Speaker", code: "COSPKR" },
+    { description: "Leader", code: "LDR" },
+    { description: "Panelist", code: "PANEL" },
+    { description: "Poster Presenter", code: "POSTERP" },
+    { description: "Regulatory Speaker", code: "REGSPKR" },
+    { description: "Speaker", code: "SPKR" },
+  ];
 </script>
 
 {#if $remoteValue}
@@ -190,7 +202,7 @@
           flex="col"
           p="4"
         >
-          <TextInput label="ID" name="ID" value={$data.ID} disabled />
+          <TextInput label="ID" name="ID" value={$data.ID} readOnly />
 
           <TextInput
             label="Event Code"
@@ -242,12 +254,16 @@
             required
           />
 
-          <TextInput
+          <Select
             label="Role"
             name="Role"
             value={$remoteValue.data.Role}
             required
-          />
+          >
+            {#each role_select as role}
+              <option value={role.code}>{role.description}</option>
+            {/each}
+          </Select>
           <TextInput
             label="Assistant"
             name="Assistant_Info"
