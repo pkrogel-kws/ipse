@@ -217,7 +217,7 @@
     // rows.forEach(row=> row.setAttribute("aria-expanded", false));
     rows.forEach(row=> {
       row.setAttribute("aria-selected", false);
-      // console.log('set row ', row);
+      // consosle.log('set row ', row);
     });
   }
 </script>
