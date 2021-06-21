@@ -164,11 +164,11 @@
     newRow.classList.toggle('rgAltRow');
     //make id unique
     newRow.id =newRow.id.replace('__0', `__${rows.length}`);
-    console.log(newRow, 'newrow');
+    // console.log(newRow, 'newrow');
     rows[0].parentNode.insertBefore(newRow, rows[0]);
     formType = "update";
     rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
-    console.log({row, rows});
+    // console.log({row, rows});
   };
 
   const handleEntityUpdated = ({ detail }) => {
@@ -200,9 +200,9 @@
       if (cellIndex >= 0) {
         // console.log('here1',{row, 'row.children': row.children})
         const cell = row.children[cellIndex];
-        console.log({ cell });
+        // console.log({ cell });
         cell.innerText = val;
-        console.log("here2");
+        // console.log("here2");
       }
     });
   }
