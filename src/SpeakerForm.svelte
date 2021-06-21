@@ -67,10 +67,7 @@
       // $data = { ...$data, ...newValues };
       // console.log("set data to", $data);
       updateForm({ defaultValues: newValues });
-      dispatch("entity-updated", {
-        type: type === "create" ? "created" : "updated",
-        data: derivedDirtyVals,
-      });
+      dispatch(`entity-${type === "create" ? "created" : "updated"}`, derivedDirtyVals);
     } catch (e) {
       //TODO: handle
     }
@@ -195,7 +192,6 @@
         <div
           display="flex"
           w="full"
-          justify="center"
           bg="white"
           rounded="lg"
           mx="auto"
@@ -233,7 +229,6 @@
           display="flex"
           flex="col"
           w="full"
-          justify="center"
           rounded="lg"
           mx="auto"
         >
@@ -285,7 +280,6 @@
         flex="col"
         mx="auto"
         rounded="lg"
-        justify="center"
         w="full"
       >
         <TextInput
@@ -381,3 +375,9 @@
     </form>
   {/if}
 {/if}
+
+<style>
+  :global(input) {
+    height: 100% !important;
+  }
+</style>

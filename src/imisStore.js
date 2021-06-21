@@ -57,7 +57,9 @@ const createStore = async (id, seqn) => {
     payload = replaceEmptyValuesInPayload(payload);
     payload = removeFieldFromPayload("Date_Modified", payload);
     payload = removeFieldFromPayload("Removed_Date", payload);
-    payload = removeFieldFromPayload("TIME_STAMP", payload);
+    // payload = removeFieldFromPayload("TIME_STAMP", payload);
+    // payload = removeFieldFromPayload("UD_1", payload);
+    // payload = removeFieldFromPayload("UD_2", payload);
 
     delete payload.PrimaryParentIdentity.IdentityElements;
     delete payload.Identity.IdentityElements;

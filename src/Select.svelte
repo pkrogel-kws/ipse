@@ -2,9 +2,9 @@
   export let label;
   export let value;
   export let name;
-  export let disabled = false;
-  export let readOnly = false;
-  export let required = false;
+  export let disabled;
+  export let readOnly;
+  export let required;
 </script>
 
 <div h="10" mb="5" class="relative select-component">

@@ -147,22 +147,38 @@
   });
 
   //map updated POST values to existing DOM so we don't have to refetch
-  const handleEntityUpdated = ({ detail }) => {
-    const { type, data } = detail;
-    toast.push(`Event successfully ${type}!`, {
+  const handleEntityCreated = ({ detail }) => {
+    toast.push(`Event successfully created`, {
       theme: {
         "--toastBackground": "#48BB78",
         "--toastProgressBackground": "#2F855A",
       },
     });
-    detail.forEach(([key, val]) => {
-      console.log("*", { key, val, headers, headerIdx: headers.indexOf(key) });
-      const cellIndex = headers.indexOf(key);
-      if (cellIndex >= 0) {
-        const cell = row.children[cellIndex];
-        cell.innerText = val;
-      }
+    const newRow = rows[0].cloneNode(true);
+
+    row=newRow;
+    patchRows(detail);
+
+    //change row color
+    newRow.classList.toggle('rgRow');
+    newRow.classList.toggle('rgAltRow');
+    //make id unique
+    newRow.id =newRow.id.replace('__0', `__${rows.length}`);
+    console.log(newRow, 'newrow');
+    rows[0].parentNode.insertBefore(newRow, rows[0]);
+    formType = "update";
+    rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
+    console.log({row, rows});
+  };
+
+  const handleEntityUpdated = ({ detail }) => {
+    toast.push(`Event successfully updated!`, {
+      theme: {
+        "--toastBackground": "#48BB78",
+        "--toastProgressBackground": "#2F855A",
+      },
     });
+    patchRows(detail);
   };
 
   //remove row
@@ -175,6 +191,21 @@
     });
     row.parentNode.removeChild(row);
   };
+
+  const patchRows = (data) => {
+    data.forEach(([key, val]) => {
+      console.log("*", { key, val, headers, headerIdx: headers.indexOf(key) });
+      const cellIndex = headers.indexOf(key);
+      // console.log({cellIndex})
+      if (cellIndex >= 0) {
+        // console.log('here1',{row, 'row.children': row.children})
+        const cell = row.children[cellIndex];
+        console.log({ cell });
+        cell.innerText = val;
+        console.log("here2");
+      }
+    });
+  }
 </script>
 
 <Modal store={modalStore}>
@@ -200,6 +231,7 @@
       {data}
       closeModal={handleCloseModal}
       on:entity-updated={handleEntityUpdated}
+      on:entity-created={handleEntityCreated}
       on:entity-deleted={handleEntityDeleted}
     />
   </div>
