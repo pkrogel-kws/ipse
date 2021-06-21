@@ -9,10 +9,13 @@ const createStore = async (id, seqn) => {
   if (seqn) {
     response = await api.get(id, seqn);
   } else {
-    response = { ...emptyContractObject };
+    // const empty_object = await import("./api/empty_object");
+    // response = empty_object.default;
+    // response = { ...emptyContractObject };
+    response = emptyContractObject();
   }
 
-  console.log("creating imis store for ", { id, seqn });
+  console.log("creating imis store for ", { id, seqn, response });
   // let response = await api.get(id, seqn);
 
   const { subscribe, set, update } = writable({
@@ -35,6 +38,10 @@ const createStore = async (id, seqn) => {
     payload = removeFieldFromPayload("TIME_STAMP", payload);
 
     console.log("repaired payload (final) ", payload);
+
+    if(!seqn && formData.SEQN !== null){
+      seqn = formData.SEQN;
+    } 
 
     response = await api.put({ data: payload, seqn, id });
     console.log("server responded with", response);

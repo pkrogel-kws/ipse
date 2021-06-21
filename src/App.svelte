@@ -122,6 +122,7 @@
     //tODO:get empty data object like we do in imis store
     $data = { ID };
     formType = "create";
+    deselectAllRows();
     modalStore.open();
   };
 
@@ -140,6 +141,7 @@
     getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
 
     const removeMutationObserver = setupMutationObserver();
+
     return () => {
       removeRowClickEventListeners();
       removeMutationObserver();
@@ -166,6 +168,9 @@
     newRow.id =newRow.id.replace('__0', `__${rows.length}`);
     // console.log(newRow, 'newrow');
     rows[0].parentNode.insertBefore(newRow, rows[0]);
+    
+
+
     formType = "update";
     rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
     // console.log({row, rows});
@@ -204,6 +209,15 @@
         cell.innerText = val;
         // console.log("here2");
       }
+    });
+  }
+
+  const deselectAllRows = () => {
+    //set aria-selected=false for all rows
+    // rows.forEach(row=> row.setAttribute("aria-expanded", false));
+    rows.forEach(row=> {
+      row.setAttribute("aria-selected", false);
+      // console.log('set row ', row);
     });
   }
 </script>

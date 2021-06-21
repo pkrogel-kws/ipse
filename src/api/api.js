@@ -130,8 +130,6 @@ export const del = async ({ id, seqn }) => {
       //suffficient auth for users
     });
 
-    response = await response.json();
-
     console.log("response from put api", response);
     return response;
   } catch (e) {

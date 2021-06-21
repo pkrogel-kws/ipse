@@ -30,7 +30,7 @@
 //   UN_1: null,
 //   Presentation_Desc: null,
 // };
-export default {
+const empty_object = {
   $type: "Asi.Soa.Core.DataContracts.GenericEntityData, Asi.Contracts",
   EntityTypeName: "CsISPE_Event_Speakers",
   PrimaryParentEntityTypeName: "Party",
@@ -219,3 +219,5 @@ export default {
     ],
   },
 };
+
+export default () =>  JSON.parse(JSON.stringify(empty_object));

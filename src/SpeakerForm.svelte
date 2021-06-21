@@ -150,6 +150,7 @@
   };
 
   onMount(async () => {
+    console.log('mounted with ', $data);
     remoteValue = await createImisStore($data.ID, $data.SEQN);
   });
   $: console.log("remoteValue", $remoteValue);
@@ -198,7 +199,8 @@
           flex="col"
           p="4"
         >
-          <TextInput label="ID" name="ID" value={$data.ID} readOnly />
+            <TextInput label="ID" name="ID" value={$data.ID} readOnly />
+            <TextInput label="SEQN" name="SEQN" value={$remoteValue.data.SEQN} readOnly />
 
           <TextInput
             label="Event Code"
