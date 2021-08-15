@@ -103,6 +103,9 @@
       ),
     ];
     console.log('got header nodes: ', headerNodes);
+    if(headerNodes.length === 0){
+      console.error("couldn't get header nodes");
+    }
     headers = headerNodes.map((elem) => elem.getAttribute("aria-label"));
     console.log("headers set to", headers);
   };
@@ -141,10 +144,10 @@
   };
 
   onMount(() => {
-    getHeaders();
-    addClickHandlersToRows();
-    setupAddButton();
-    getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
+    // getHeaders();
+    // addClickHandlersToRows();
+    // setupAddButton();
+    // getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
 
     const removeMutationObserver = setupMutationObserver();
 
