@@ -56,6 +56,7 @@
 
   const setupMutationObserver = () => {
     const targetNode = document.getElementById(MUTATION_OBSERVER_NODE_ID);
+    console.log({targetNode});
 
     const config = { attributes: false, childList: true, subtree: true };
 
@@ -72,6 +73,7 @@
 
     // Start observing the target node for configured mutations
     observer.observe(targetNode, config);
+    console.log('mutation observer setup', observer)
 
     // Later, you can stop observing
 
@@ -95,11 +97,13 @@
   };
 
   const getHeaders = () => {
-    headers = [
+    const headerNodes = [
       ...document.querySelectorAll(
         ":not(.rgPager) > .rgMasterTable > thead > tr:not(.rgPager)>th"
       ),
-    ].map((elem) => elem.getAttribute("aria-label"));
+    ];
+    console.log('got header nodes: ', headerNodes);
+    headers = headerNodes.map((elem) => elem.getAttribute("aria-label"));
     console.log("headers set to", headers);
   };
 
