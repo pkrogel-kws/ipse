@@ -105,7 +105,7 @@
 
   const getID = () => {
     if (rows && rows.length) {
-      ID = rows[0].children[headers.indexOf("ID") || headers.indexOf("Id") || headers.indexOf("id")].innerText;
+      ID = rows[0].children[headers.indexOf("ID") || headers.indexOf("CsISPE_Event_Speakers_Id")].innerText;
     }
   };
 
