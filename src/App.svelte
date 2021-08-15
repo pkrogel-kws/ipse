@@ -9,10 +9,12 @@
   import AddButton from "./AddButton.svelte";
 
   const ROW_CLICK_EVENT_TYPE = "dblclick";
-  const MUTATION_OBSERVER_NODE_ID =
-    "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ListerPanel";
-  const ADD_BTN_GROUP_ID =
-    "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ResultsGrid_TopRightPanel";
+  //declare where you import script. these will change depending on
+  //which page you are adding the modal to.
+  // const MUTATION_OBSERVER_NODE_ID =
+    // "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ListerPanel";
+  // const ADD_BTN_GROUP_ID =
+  //   "ctl01_TemplateBody_WebPartManager1_gwpciNewQueryMenuCommon_ciNewQueryMenuCommon_ResultsGrid_TopRightPanel";
   let headers = [];
   const modalStore = store(false);
   const data = writable();
@@ -198,8 +200,9 @@
   };
 
   const patchRows = (data) => {
+    console.log('patchRows, data: ', {row, data});
     data.forEach(([key, val]) => {
-      console.log("*", { key, val, headers, headerIdx: headers.indexOf(key) });
+      // console.log("*", { key, val, headers, headerIdx: headers.indexOf(key) });
       const cellIndex = headers.indexOf(key);
       // console.log({cellIndex})
       if (cellIndex >= 0) {
@@ -213,10 +216,12 @@
   }
 
   const deselectAllRows = () => {
+    console.log('deselecting all rows', rows);
     //set aria-selected=false for all rows
     // rows.forEach(row=> row.setAttribute("aria-expanded", false));
     rows.forEach(row=> {
       row.setAttribute("aria-selected", false);
+      row.classList.remove("rgSelectedRow");
       // consosle.log('set row ', row);
     });
   }
