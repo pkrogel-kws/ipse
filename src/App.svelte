@@ -106,9 +106,16 @@
     if(headerNodes.length === 0){
       console.error("couldn't get header nodes");
     }
-    headers = headerNodes.map((elem) => elem.getAttribute("aria-label"));
+    // headers = headerNodes.map((elem) => elem.getAttribute("aria-label"));
+    headers = headerNodes.map((elem) => {
+      const label =  elem.getAttribute("aria-label");
+      console.log({label});
+      return label;
+    });
+
     console.log("headers set to", headers);
   };
+  window.getHeaders = getHeaders;
 
   const getID = () => {
     if (rows && rows.length) {
@@ -143,11 +150,16 @@
     }, 500);
   };
 
-  onMount(() => {
-    // getHeaders();
-    // addClickHandlersToRows();
-    // setupAddButton();
-    // getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
+  onMount(async () => {
+    getHeaders();
+    if(!headers || !headers[0]){
+      console.log("couldn't get headers. waiting to try again");
+      await new Promise(r => setTimeout(r, 500));
+      getHeaders();
+    }
+    addClickHandlersToRows();
+    setupAddButton();
+    getID(); //needs to be after addClickHandlerToRows bc thats where it sets "rows". should change so order doesnt matter
 
     const removeMutationObserver = setupMutationObserver();
 
