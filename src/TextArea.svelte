@@ -6,7 +6,7 @@
   export let readOnly = false;
 </script>
 
-<div class="relative h-64 input-component mb-5">
+<div class="relative h-84 input-component mb-5">
   <textarea
     {disabled}
     {readOnly}
