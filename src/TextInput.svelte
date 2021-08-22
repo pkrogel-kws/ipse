@@ -7,7 +7,7 @@
   export let required = false;
 </script>
 
-<div h="10" mb="5" class="relative input-component">
+<div  class="relative input-component">
   <input
     {required}
     {disabled}
@@ -16,7 +16,6 @@
     type="text"
     {name}
     {value}
-    h="full"
     w="full"
     border="gray-300"
     px="2"
@@ -39,7 +38,7 @@
   label {
     top: 0%;
     transform: translateY(-50%);
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(37, 99, 235, 1);
   }
   .empty input:not(:focus) + label {

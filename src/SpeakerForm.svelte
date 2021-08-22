@@ -5,8 +5,6 @@
   import TextInput from "./TextInput.svelte";
   import TextArea from "./TextArea.svelte";
   import DateInput from "./DateInput.svelte";
-  import DateInput2 from "./DateInput2.svelte";
-  import DateInput3 from "./DateInput3.svelte";
   import createImisStore from "./imisStore";
   import LoadingSpinner from "./LoadingSpinner.svelte";
   import Switch from "./Switch.svelte";
@@ -32,9 +30,11 @@
     submitValues,
     touched,
     updateForm,
+    isFormValid,
+    validity,
     ...rest
   } = formula();
-
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     const values = transformStringFields(get(formValues));
@@ -98,40 +98,9 @@
     return values;
   };
 
-  // const { form, reset, touched, data: formData } = createForm({
-  //   onSubmit: async (values) => {
-  //     try {
-  //       //todo: probably handle this at the form field level rather than form onsubmit level
-  //       Object.entries(values).forEach(([key, val]) => {
-  //         if (val === "True") {
-  //           values[key] = true;
-  //           return;
-  //         }
-  //         if (val === "False") {
-  //           values[key] = false;
-  //           return;
-  //         }
-  //         const maybeDate = new Date(val);
-  //         if(maybeDate !=='Invalid Date' && !isNaN(maybeDate)){
-  //           console.log('date !!! ' + val );
-  //            values[key] = maybeDate.toISOString();
-  //            return;
-  //         }
-  //       });
-  //       console.log("Form.onSubmit", values);
 
-  //       $remoteValue = values;//API call
-  //     } catch (e) {
-  //       //TODO: handle
-  //     }
-  //   },
-  // });
   $: canSave =
-    !!Object.values($dirty).filter((t) => !!t).length || $remoteValue?.loading;
-  //TODO:set canSave = false
-
-  // $: console.log($formValues, "formDataChanged");
-  $: console.log(type, "form type changed");
+    $isFormValid && !$remoteValue?.loading;
 
   let resetEnd, resetStart;
 
@@ -176,7 +145,8 @@
   {:else}
     <form
       use:form
-      min-w="3xl"
+      w="72rem"
+      max-w="90vw"
       display="flex"
       flex="col"
       justify="center"
@@ -198,6 +168,7 @@
           mx="auto"
           flex="col"
           p="4"
+          class="space-y-4"
         >
             <TextInput label="ID" name="ID" value={$data.ID} readOnly />
             <TextInput label="SEQN" name="SEQN" value={$remoteValue.data.SEQN} readOnly />
@@ -233,6 +204,7 @@
           w="full"
           rounded="lg"
           mx="auto"
+          class="space-y-4"
         >
           <DateInput
             label="Start"
@@ -283,6 +255,7 @@
         mx="auto"
         rounded="lg"
         w="full"
+        class="space-y-4"
       >
         <TextInput
           label="Title"
@@ -312,8 +285,7 @@
         {#if type === "update"}
           <button
             bg="red-500 active:red-600 hover:red-600"
-            font="bold"
-            text="sm white uppercase"
+
             px="6"
             py="3"
             rounded="lg"
@@ -324,7 +296,7 @@
             transition="all"
             opacity="disabled:50"
             uppercase
-            class="shadow"
+            class="shadow btn DangerButton"
             on:click={handleDelete}
           >
             <i class="fas fa-heart" /> Delete
@@ -333,12 +305,7 @@
         <div class="flex-grow" />
 
         <button
-          text="sm primary uppercase hover:white "
-          font="bold"
-          bg="transparent hover:primary active:primary-600"
-          border="solid primary"
-          px="6"
-          py="3"
+     
           outline="none"
           mr="1"
           mb="1"
@@ -346,8 +313,7 @@
           duration="150"
           opacity="disabled:50"
           ease="linear"
-          class="border "
-          rounded="lg"
+          class="border btn"
           type="button"
           on:click={handleReset}
         >
@@ -355,10 +321,6 @@
         </button>
         <button
           bg="primary hover:primary-600 active:primary-600"
-          text="white sm uppercase"
-          font="bold"
-          px="6"
-          py="3"
           rounded="lg"
           outline="none"
           mr="1"
@@ -367,7 +329,7 @@
           tranistion="all"
           duration="150"
           opacity="disabled:50"
-          class="shadow "
+          class="shadow btn PrimaryButton"
           type="submit"
           disabled={!canSave}
         >
@@ -378,8 +340,8 @@
   {/if}
 {/if}
 
-<style>
+<!-- <style>
   :global(input) {
     height: 100% !important;
   }
-</style>
+</style> -->

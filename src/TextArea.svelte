@@ -19,6 +19,7 @@
     w="full"
     border="gray-300"
     px="2"
+    py="5px"
     rounded="sm"
     transition="all"
     {value}
@@ -39,7 +40,7 @@
   label {
     top: 0%;
     transform: translateY(-50%);
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(37, 99, 235, 1);
   }
   .empty textarea:not(:focus) + label {

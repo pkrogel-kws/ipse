@@ -7,7 +7,7 @@
   export let required;
 </script>
 
-<div h="10" mb="5" class="relative select-component">
+<div  class="relative select-component">
   <select
     {required}
     {disabled}
@@ -16,11 +16,10 @@
     type="text"
     {name}
     {value}
-    h="full"
     w="full"
     border="gray-300"
     px="2"
-    rounded="sm"
+    rounded="5px"
     transition="all"
   >
     <slot />
@@ -41,7 +40,7 @@
   label {
     top: 0%;
     transform: translateY(-50%);
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(37, 99, 235, 1);
   }
   .empty select:not(:focus) + label {

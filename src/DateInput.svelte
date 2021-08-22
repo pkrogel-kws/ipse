@@ -37,17 +37,16 @@
   // }
 </script>
 
-<div class="relative h-10 input-component mb-5">
+<div class="relative input-component">
   <div
     h="full"
     w="full"
     border="gray-300"
-    px="2"
-    rounded="sm"
     transition="all"
     items="stretch"
     display="flex"
-    class="input"
+    class="input rounded-5px"
+
   >
     <!-- <Datepicker id={label} name="name" bind:selected /> -->
     <Flatpickr
@@ -102,7 +101,7 @@
   label {
     top: 0%;
     transform: translateY(-50%);
-    font-size: 11px;
+    font-size: 10px;
     color: rgba(37, 99, 235, 1);
   }
   .empty .input:not(:focus) + label {
