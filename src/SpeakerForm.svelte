@@ -145,7 +145,7 @@
   {:else}
     <form
       use:form
-      w="72rem"
+      w="96rem"
       max-w="90vw"
       display="flex"
       flex="col"
