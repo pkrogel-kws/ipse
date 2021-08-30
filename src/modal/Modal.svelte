@@ -105,10 +105,14 @@
   }
   div.content-wrapper {
     z-index: 10;
-    max-width: 70vw;
+    max-width: 90vw;
     border-radius: 0.3rem;
     background-color: white;
     overflow: hidden;
+    min-height: 88vh;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
   @media (max-width: 767px) {
     div.content-wrapper {
@@ -116,8 +120,12 @@
     }
   }
   div.content {
-    max-height: 80vh;
+    max-height: 90vh;
     overflow: auto;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
   }
   h1 {
     opacity: 0.5;

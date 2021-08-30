@@ -145,12 +145,12 @@
   {:else}
     <form
       use:form
-      w="96rem"
-      max-w="90vw"
+      w="88vw"
       display="flex"
-      flex="col"
+      flex="col grow"
       justify="center"
       items="stretch"
+      style="height:initial;"
       on:submit={onSubmit}
     >
       {#if $remoteValue?.loading}
@@ -251,7 +251,7 @@
         bg="white"
         p="4"
         display="flex"
-        flex="col"
+        flex="col grow"
         mx="auto"
         rounded="lg"
         w="full"

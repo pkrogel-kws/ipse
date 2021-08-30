@@ -263,7 +263,7 @@
     <div flex="grow" />
     <CloseIcon onClick={handleCloseModal} />
   </div>
-  <div slot="content" mx="8" position="relative">
+  <div slot="content" mx="8" position="relative" display="flex" flex="grow">
     <SpeakerForm
       type={formType}
       {data}

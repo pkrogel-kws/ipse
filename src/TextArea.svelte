@@ -6,15 +6,14 @@
   export let readOnly = false;
 </script>
 
-<div class="relative h-84 input-component mb-5">
+<div class="relative h-full flex-grow input-component mb-5 flex">
   <textarea
     {disabled}
     {readOnly}
     id={name}
     {name}
     type="text"
-    rows="50"
-    cols="50"
+
     h="full"
     w="full"
     border="gray-300"
@@ -52,6 +51,7 @@
     color: rgba(70, 70, 70, 1);
   }
   textarea {
+    height: initial;
     border-width: 1px;
   }
   textarea:focus {
