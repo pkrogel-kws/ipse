@@ -297,6 +297,7 @@
             opacity="disabled:50"
             uppercase
             class="shadow btn DangerButton"
+            id="speaker-delete-btn"
             on:click={handleDelete}
           >
             <i class="fas fa-heart" /> Delete

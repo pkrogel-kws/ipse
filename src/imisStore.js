@@ -134,14 +134,16 @@ const extractValuesFromResponse = (response) => {
 
 const patchPayload = (payload, values) => {
   payload.Properties.$values.forEach(({ Name, Value }, idx) => {
+
     const newVal = values[Name];
 
     if (!newVal) {
       return;
     }
-    // console.log(`patching `, { Name, Value, idx, newVal });
     if (Value?.$value !== undefined) {
-      payload.Properties.$values[idx] = { ...Value, $value: newVal };
+      console.log(`patching: `, { Name, Value, idx, newVal, propToPatch: payload.Properties.$values[idx] });
+      payload.Properties.$values[idx].Value = { ...Value, $value: newVal };
+      // console.log('payload properties after patch:', payload.Properties);
       return;
     }
 

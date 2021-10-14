@@ -34,7 +34,8 @@
   };
 
   const addClickHandlersToRows = () => {
-    rows = document.querySelectorAll(".rgMasterTable > tbody > tr");
+    console.log('adding click handler called')
+    rows = document.querySelectorAll(".rgMasterTable > tbody > tr") || [];
 
     rows.forEach((rowElem) => {
       const handleClickRow = () => {
@@ -52,9 +53,11 @@
         rowElem.removeEventListener(ROW_CLICK_EVENT_TYPE, handleClickRow);
       });
     });
+    console.log('add click handler finished')
   };
 
   const setupMutationObserver = () => {
+    console.log('setting up mutation observer');
     const targetNode = document.getElementById(MUTATION_OBSERVER_NODE_ID);
     console.log({targetNode});
 
@@ -103,35 +106,48 @@
       ),
     ];
     console.log('got header nodes: ', headerNodes);
-    if(headerNodes.length === 0){
+    if(headerNodes.length <= 0){
       console.error("couldn't get header nodes");
+    }else{
+      headers = headerNodes.map((elem) => {
+        const label =  elem.getAttribute("aria-label");
+        if(label){
+          return label
+        }else{
+          console.log(elem, "didn't have aria label");
+        }
+      });
+
+      console.log("headers set to", headers);
     }
     // headers = headerNodes.map((elem) => elem.getAttribute("aria-label"));
-    headers = headerNodes.map((elem) => {
-      const label =  elem.getAttribute("aria-label");
-      console.log({label});
-      return label;
-    });
-
-    console.log("headers set to", headers);
+    
   };
   window.getHeaders = getHeaders;
+  window.headers=headers;
 
   const getID = () => {
+    console.log('get ID called');
     if (rows && rows.length) {
       ID = rows[0].children[headers.indexOf("ID") || headers.indexOf("CsISPE_Event_Speakers_Id")].innerText;
     }
+    console.log('getId finished')
   };
 
   const setupAddButton = () => {
+    console.log('setup button called')
     if (document.getElementById("addSpeakerBtn")) {
       return;
     }
     const buttonContainer = document.getElementById(ADD_BTN_GROUP_ID);
-    const addBtn = new AddButton({
-      target: buttonContainer,
-      props: { onClick: handleClickAddBtn },
-    });
+    if(buttonContainer){
+        const addBtn = new AddButton({
+        target: buttonContainer,
+        props: { onClick: handleClickAddBtn },
+      });
+    }
+    console.log('setup button finished')
+
   };
 
   const handleClickAddBtn = () => {
@@ -152,7 +168,7 @@
 
   onMount(async () => {
     getHeaders();
-    if(!headers || !headers[0]){
+    if(!headers || !headers.length || !headers[0]){
       console.log("couldn't get headers. waiting to try again");
       await new Promise(r => setTimeout(r, 500));
       getHeaders();
